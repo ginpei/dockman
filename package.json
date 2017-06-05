@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "build": "electron .",
+    "lint": "eslint ./main.js",
+    "start": "npm run lint && npm run build"
+  },
+  "name": "elcapp",
+  "version": "0.0.0",
+  "main": "main.js",
+  "dependencies": {
+    "electron": "^1.6.10"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0"
+  }
+}
