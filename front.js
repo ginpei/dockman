@@ -31,16 +31,6 @@ var app = new Vue({
 					.map(d=>new DockerInfo({ format: d }));
 				app.list = list;
 			});
-
-			// TODO: show error and anything needed
-
-			// cmd.stderr.on('data', (data)=>{
-			// 	console.log(`stderr: ${data}`);
-			// });
-
-			// cmd.on('close', (code)=>{
-			// 	console.log(`child process exited with code ${code}`);
-			// });
 		},
 
 		update_onclick(event) {
