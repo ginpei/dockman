@@ -1,8 +1,8 @@
 {
   "scripts": {
-    "build": "electron .",
+    "run": "electron .",
     "lint": "eslint ./main.js ./front.js",
-    "start": "npm run lint && npm run build"
+    "start": "npm run lint && npm run run"
   },
   "name": "elcapp",
   "version": "0.0.0",
