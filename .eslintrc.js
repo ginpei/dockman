@@ -10,7 +10,7 @@ module.exports = {
 		"array-bracket-spacing": "error",
 		"array-callback-return": "error",
 		"arrow-body-style": "error",
-		"arrow-parens": "error",
+		"arrow-parens": "off",
 		"arrow-spacing": [
 			"error",
 			{
@@ -73,16 +73,7 @@ module.exports = {
 		"handle-callback-err": "error",
 		"id-blacklist": "error",
 		"id-length": [
-			"error",
-			{
-				"exceptions": [
-					"$",
-					"i",
-					"l",
-					"x",
-					"y"
-				],
-			}
+			"off",
 		],
 		"id-match": "error",
 		"indent": [

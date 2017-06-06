@@ -1,4 +1,4 @@
-const elExec = document.querySelector('#exec');
+/* global Vue */
 // const Vue = require('vue');
 const { spawn } = require('child_process');
 
@@ -24,15 +24,19 @@ DockerInfo.format = '{{.ID}}\t{{.Image}}\t{{.CreatedAt}}\t{{.Names}}\t{{.Status}
 
 const cmd = spawn('docker', ['ps', '-a', '--format', DockerInfo.format]);
 
-cmd.stdout.on('data', (data) => {
-	const list = data.toString().split('\n').map(d=>new DockerInfo({ format: d }));
+cmd.stdout.on('data', (data)=>{
+	const list = data.toString()
+		.split('\n')
+		.map(d=>new DockerInfo({ format: d }));
 	app.list = list;
 });
 
-cmd.stderr.on('data', (data) => {
-	console.log(`stderr: ${data}`);
-});
+// TODO: show error and anything needed
 
-cmd.on('close', (code) => {
-	console.log(`child process exited with code ${code}`);
-});
+// cmd.stderr.on('data', (data)=>{
+// 	console.log(`stderr: ${data}`);
+// });
+
+// cmd.on('close', (code)=>{
+// 	console.log(`child process exited with code ${code}`);
+// });
