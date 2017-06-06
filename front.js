@@ -1,5 +1,14 @@
 const elExec = document.querySelector('#exec');
+// const Vue = require('vue');
 const { spawn } = require('child_process');
+
+var app = new Vue({
+	el: '#app',
+	data: {
+		title: 'Docker Containers',
+		list: [],
+	},
+});
 
 class DockerInfo {
 	constructor(options) {
@@ -17,18 +26,7 @@ const cmd = spawn('docker', ['ps', '-a', '--format', DockerInfo.format]);
 
 cmd.stdout.on('data', (data) => {
 	const list = data.toString().split('\n').map(d=>new DockerInfo({ format: d }));
-	const html = list
-		.map((info)=>{
-			if (!info.id) {
-				return '';
-			}
-
-			const html = `<tr><td><code>${info.id}</code></td><td><code>${info.names}</code></td></tr>`;
-			return html;
-		})
-		.join('');
-	const elList = document.querySelector('#tbody');
-	elList.innerHTML = html;
+	app.list = list;
 });
 
 cmd.stderr.on('data', (data) => {

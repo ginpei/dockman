@@ -5,16 +5,24 @@
 		<title>Elecapp</title>
 	</head>
 	<body>
-		<h1>Docker Containers</h1>
-		<table>
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Names</th>
-				</tr>
-			</thead>
-			<tbody id="tbody"></tbody>
-		</table>
+		<div id="app">
+			<h1>{{title}}</h1>
+			<table>
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Names</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="d in list">
+						<td>{{d.id}}</td>
+						<td>{{d.names}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<script src="vue.min.js"></script>
 		<script src="front.js"></script>
 	</body>
 </html>
