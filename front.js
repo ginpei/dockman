@@ -17,7 +17,7 @@ DockerInfo.format = '{{.ID}}\t{{.Image}}\t{{.CreatedAt}}\t{{.Names}}\t{{.Status}
 var app = new Vue({
 	el: '#app',
 	data: {
-		visible: true,
+		ready: true,
 		title: 'Docker Containers',
 		list: [],
 		checked: {},
