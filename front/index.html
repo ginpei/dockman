@@ -2,6 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
+		<link rel="stylesheet" href="app.css" />
 		<title>Elecapp</title>
 	</head>
 	<body>
@@ -15,7 +16,7 @@
 				...
 			</div>
 			<div v-show="!working && list.length > 0">
-				<table>
+				<table class="the-table">
 					<thead>
 						<tr>
 							<th></th>
@@ -27,7 +28,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr v-for="d in list">
+						<tr v-for="d in list" :class="getClassesFor(d)">
 							<td><input v-model="checked[d.id]" @click="checked_onclick" type="checkbox" /></td>
 							<td>{{d.id}}</td>
 							<td>{{d.image}}</td>

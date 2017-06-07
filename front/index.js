@@ -44,6 +44,14 @@ var app = new Vue({
 				.filter(d=>d);
 		},
 
+		getClassesFor(containerStatus) {
+			const classes = {
+				'is-stopped': containerStatus.stopped,
+				'is-working': containerStatus.working,
+			};
+			return classes;
+		},
+
 		update_onclick(event) {
 			this.update();
 		},

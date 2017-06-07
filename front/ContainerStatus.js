@@ -4,6 +4,14 @@ class ContainerStatus {
 			this[key] = options[key];
 		});
 	}
+
+	get working() {
+		return this.status.startsWith('Up ');
+	}
+
+	get stopped() {
+		return this.status.startsWith('Exited ');
+	}
 }
 
 ContainerStatus.format = '{{.ID}}\t{{.Image}}\t{{.CreatedAt}}\t{{.Names}}\t{{.Status}}';
