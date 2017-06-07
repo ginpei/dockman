@@ -12,6 +12,9 @@ class ContainerStatus {
 ContainerStatus.format = '{{.ID}}\t{{.Image}}\t{{.CreatedAt}}\t{{.Names}}\t{{.Status}}';
 ContainerStatus.keys = 'id image createdAt names status'.split(' ');
 ContainerStatus.fromCLIResult = function(line) {
+	if (!line) {
+		return null;
+	}
 	const arr = line.split('\t');
 	const options = {};
 	ContainerStatus.keys.forEach((key, index)=>{
@@ -58,7 +61,8 @@ var app = new Vue({
 		createContainerStatusList(data) {
 			return data.toString()
 				.split('\n')
-				.map(d=>ContainerStatus.fromCLIResult(d));
+				.map(d=>ContainerStatus.fromCLIResult(d))
+				.filter(d=>d);
 		},
 
 		update_onclick(event) {
