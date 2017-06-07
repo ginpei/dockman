@@ -21,6 +21,7 @@ var app = new Vue({
 		title: 'Docker Containers',
 		list: [],
 		checked: {},
+		hasChecked: false,
 		errorCode: 0,
 		errorMessage: '',
 	},
@@ -54,6 +55,10 @@ var app = new Vue({
 			cmd.on('close', (code)=>{
 				this.update();
 			});
+		},
+
+		checked_onclick(event) {
+			this.hasChecked = Object.values(this.checked).some(d=>d);
 		},
 	},
 });

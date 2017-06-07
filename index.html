@@ -9,7 +9,7 @@
 			<h1>{{title}}</h1>
 			<p>
 				<button @click="update_onclick">Update</button>
-				<button @click="remove_onclick">Remove</button>
+				<button @click="remove_onclick" v-bind:disabled="!hasChecked">Remove</button>
 			</p>
 			<div v-show="list.length > 0">
 				<table>
@@ -25,7 +25,7 @@
 					</thead>
 					<tbody>
 						<tr v-for="d in list">
-							<td><input v-model="checked[d.id]" type="checkbox" /></td>
+							<td><input v-model="checked[d.id]" @click="checked_onclick" type="checkbox" /></td>
 							<td>{{d.id}}</td>
 							<td>{{d.image}}</td>
 							<td>{{d.names}}</td>
