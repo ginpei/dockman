@@ -43,7 +43,10 @@
 				<p>ERROR #{{errorCode}}: <q>{{errorMessage}}</q></p>
 			</div>
 		</div>
+		<script>
+			window.spawn = require('child_process').spawn;
+		</script>
 		<script src="../lib/vue.min.js"></script>
-		<script src="index.js"></script>
+		<script src="../build/front.js"></script>
 	</body>
 </html>

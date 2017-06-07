@@ -1,7 +1,7 @@
-/* global Vue */
+/* global Vue spawn */
 // const Vue = require('vue');
+// const { spawn } = require('child_process');
 const ContainerStatus = require('./ContainerStatus.js');
-const { spawn } = require('child_process');
 
 var app = new Vue({
 	el: '#app',
