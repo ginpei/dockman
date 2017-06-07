@@ -1,7 +1,7 @@
 {
   "scripts": {
     "run": "electron .",
-    "lint": "eslint ./main.js ./front.js",
+    "lint": "eslint ./main.js front/*.js",
     "start": "npm run lint && npm run run"
   },
   "name": "elcapp",
