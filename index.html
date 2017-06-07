@@ -5,7 +5,7 @@
 		<title>Elecapp</title>
 	</head>
 	<body>
-		<div id="app">
+		<div v-show="visible" id="app" style="display: none;">
 			<h1>{{title}}</h1>
 			<p>
 				<button @click="update_onclick">Update</button>
