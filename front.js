@@ -29,6 +29,8 @@ var app = new Vue({
 	methods: {
 		update() {
 			this.working = true;
+			this.checked = {};
+			this.hasChecked = false;
 
 			const cmd = spawn('docker', ['ps', '-a', '--format', ContainerStatus.format]);
 
