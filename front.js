@@ -35,10 +35,7 @@ var app = new Vue({
 			const cmd = spawn('docker', ['ps', '-a', '--format', ContainerStatus.format]);
 
 			cmd.stdout.on('data', (data)=>{
-				const list = data.toString()
-					.split('\n')
-					.map(d=>new ContainerStatus({ format: d }));
-				app.list = list;
+				this.list = this.createContainerStatusList(data);
 			});
 
 			cmd.stderr.on('data', (data)=>{
@@ -49,6 +46,12 @@ var app = new Vue({
 				this.working = false;
 				this.errorCode = code;
 			});
+		},
+
+		createContainerStatusList(data) {
+			return data.toString()
+				.split('\n')
+				.map(d=>new ContainerStatus({ format: d }));
 		},
 
 		update_onclick(event) {
