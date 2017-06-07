@@ -21,6 +21,8 @@ var app = new Vue({
 		title: 'Docker Containers',
 		list: [],
 		checked: {},
+		errorCode: 0,
+		errorMessage: '',
 	},
 	methods: {
 		update() {
@@ -31,6 +33,14 @@ var app = new Vue({
 					.split('\n')
 					.map(d=>new DockerInfo({ format: d }));
 				app.list = list;
+			});
+
+			cmd.stderr.on('data', (data)=>{
+				this.errorMessage = data.toString();
+			});
+
+			cmd.on('close', (code)=>{
+				this.errorCode = code;
 			});
 		},
 
