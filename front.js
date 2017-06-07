@@ -18,6 +18,7 @@ var app = new Vue({
 	el: '#app',
 	data: {
 		ready: true,
+		working: false,
 		title: 'Docker Containers',
 		list: [],
 		checked: {},
@@ -27,6 +28,8 @@ var app = new Vue({
 	},
 	methods: {
 		update() {
+			this.working = true;
+
 			const cmd = spawn('docker', ['ps', '-a', '--format', ContainerStatus.format]);
 
 			cmd.stdout.on('data', (data)=>{
@@ -41,6 +44,7 @@ var app = new Vue({
 			});
 
 			cmd.on('close', (code)=>{
+				this.working = false;
 				this.errorCode = code;
 			});
 		},

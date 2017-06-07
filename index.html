@@ -11,7 +11,10 @@
 				<button @click="update_onclick">Update</button>
 				<button @click="remove_onclick" v-bind:disabled="!hasChecked">Remove</button>
 			</p>
-			<div v-show="list.length > 0">
+			<div v-show="working">
+				...
+			</div>
+			<div v-show="!working && list.length > 0">
 				<table>
 					<thead>
 						<tr>
@@ -35,7 +38,7 @@
 					</tbody>
 				</table>
 			</div>
-			<div v-show="errorCode">
+			<div v-show="!working && errorCode">
 				<p>ERROR #{{errorCode}}: <q>{{errorMessage}}</q></p>
 			</div>
 		</div>
