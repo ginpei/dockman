@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev-front": "watchify -v -e front/index.js -o build/front.js",
+    "dev-front": "watchify -v -t vueify -e front/index.js -o build/front.js",
     "run": "electron .",
     "lint": "eslint ./main.js front/*.js",
     "start": "npm run lint && npm run run"
@@ -11,7 +11,8 @@
   "dependencies": {
     "browserify": "^14.4.0",
     "electron": "^1.6.10",
-    "vue": "^2.3.3"
+    "vue": "^2.3.3",
+    "vueify": "^9.4.1"
   },
   "devDependencies": {
     "eslint": "^3.19.0",

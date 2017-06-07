@@ -6,47 +6,10 @@
 		<title>Elecapp</title>
 	</head>
 	<body>
-		<div v-show="ready" id="app" style="display: none;">
-			<h1>{{title}}</h1>
-			<p>
-				<button @click="update_onclick">Update</button>
-				<button @click="remove_onclick" v-bind:disabled="!hasChecked">Remove</button>
-			</p>
-			<div v-show="working">
-				...
-			</div>
-			<div v-show="!working && list.length > 0">
-				<table class="the-table">
-					<thead>
-						<tr>
-							<th></th>
-							<th>ID</th>
-							<th>Image</th>
-							<th>Names</th>
-							<th>Created At</th>
-							<th>Status</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr v-for="d in list" :class="getClassesFor(d)">
-							<td><input v-model="checked[d.id]" @click="checked_onclick" type="checkbox" /></td>
-							<td>{{d.id}}</td>
-							<td>{{d.image}}</td>
-							<td>{{d.names}}</td>
-							<td>{{d.createdAt}}</td>
-							<td>{{d.status}}</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div v-show="!working && errorCode">
-				<p>ERROR #{{errorCode}}: <q>{{errorMessage}}</q></p>
-			</div>
-		</div>
+		<div v-show="ready" id="app" style="display: none;"></div>
 		<script>
 			window.spawn = require('child_process').spawn;
 		</script>
-		<script src="../lib/vue.min.js"></script>
 		<script src="../build/front.js"></script>
 	</body>
 </html>
