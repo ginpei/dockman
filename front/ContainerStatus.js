@@ -5,8 +5,11 @@ class ContainerStatus {
 		});
 	}
 }
+
 ContainerStatus.format = '{{.ID}}\t{{.Image}}\t{{.CreatedAt}}\t{{.Names}}\t{{.Status}}';
+
 ContainerStatus.keys = 'id image createdAt names status'.split(' ');
+
 ContainerStatus.fromCLIResult = function(line) {
 	if (!line) {
 		return null;
