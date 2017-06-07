@@ -2,7 +2,7 @@
 // const Vue = require('vue');
 const { spawn } = require('child_process');
 
-class DockerInfo {
+class ContainerStatus {
 	constructor(options) {
 		if (options.format) {
 			const fArray = options.format.split('\t');
@@ -12,7 +12,7 @@ class DockerInfo {
 		}
 	}
 }
-DockerInfo.format = '{{.ID}}\t{{.Image}}\t{{.CreatedAt}}\t{{.Names}}\t{{.Status}}';
+ContainerStatus.format = '{{.ID}}\t{{.Image}}\t{{.CreatedAt}}\t{{.Names}}\t{{.Status}}';
 
 var app = new Vue({
 	el: '#app',
@@ -27,12 +27,12 @@ var app = new Vue({
 	},
 	methods: {
 		update() {
-			const cmd = spawn('docker', ['ps', '-a', '--format', DockerInfo.format]);
+			const cmd = spawn('docker', ['ps', '-a', '--format', ContainerStatus.format]);
 
 			cmd.stdout.on('data', (data)=>{
 				const list = data.toString()
 					.split('\n')
-					.map(d=>new DockerInfo({ format: d }));
+					.map(d=>new ContainerStatus({ format: d }));
 				app.list = list;
 			});
 
