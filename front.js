@@ -4,15 +4,22 @@ const { spawn } = require('child_process');
 
 class ContainerStatus {
 	constructor(options) {
-		if (options.format) {
-			const fArray = options.format.split('\t');
-			'id image createdAt names status'.split(' ').forEach((key, index)=>{
-				this[key] = fArray[index];
-			});
-		}
+		ContainerStatus.keys.forEach(key=>{
+			this[key] = options[key];
+		});
 	}
 }
 ContainerStatus.format = '{{.ID}}\t{{.Image}}\t{{.CreatedAt}}\t{{.Names}}\t{{.Status}}';
+ContainerStatus.keys = 'id image createdAt names status'.split(' ');
+ContainerStatus.fromCLIResult = function(line) {
+	const arr = line.split('\t');
+	const options = {};
+	ContainerStatus.keys.forEach((key, index)=>{
+		options[key] = arr[index];
+	});
+	const instance = new ContainerStatus(options);
+	return instance;
+};
 
 var app = new Vue({
 	el: '#app',
@@ -51,7 +58,7 @@ var app = new Vue({
 		createContainerStatusList(data) {
 			return data.toString()
 				.split('\n')
-				.map(d=>new ContainerStatus({ format: d }));
+				.map(d=>ContainerStatus.fromCLIResult(d));
 		},
 
 		update_onclick(event) {
