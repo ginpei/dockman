@@ -3,7 +3,7 @@
     "dev-front": "watchify -v -t vueify -e front/index.js -o build/front.js",
     "run": "electron .",
     "lint": "eslint ./main.js front/*.js",
-    "start": "npm run lint && npm run run"
+    "start": "npm run lint && concurrently \"npm run run -s\" \"npm run dev-front -s\""
   },
   "name": "elcapp",
   "version": "0.0.0",
@@ -15,6 +15,7 @@
     "vueify": "^9.4.1"
   },
   "devDependencies": {
+    "concurrently": "^3.4.0",
     "eslint": "^3.19.0",
     "watchify": "^3.9.0"
   }
