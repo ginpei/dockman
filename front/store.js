@@ -1,15 +1,19 @@
+const Vue = require('vue');
 const Vuex = require('vuex');
+
+Vue.use(Vuex);
 
 module.exports = new Vuex.Store({
 	state: {
 		working: false,
 	},
+
 	mutations: {
-		startWorking(state) {
+		START_WORKING(state) {
 			state.working = true;
 		},
 
-		finishWorking(state) {
+		FINISH_FORKING(state) {
 			state.working = false;
 		},
 	},

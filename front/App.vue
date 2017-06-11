@@ -28,10 +28,10 @@
 			<button @click="update_onclick">Update</button>
 			<button @click="remove_onclick" v-bind:disabled="!hasChecked">Remove</button>
 		</p>
-		<div v-show="state.working">
+		<div v-show="$store.state.working">
 			...
 		</div>
-		<div v-show="!state.working && list && list.length > 0">
+		<div v-show="!$store.state.working && list && list.length > 0">
 			<table class="the-table">
 				<thead>
 					<tr>
@@ -55,7 +55,7 @@
 				</tbody>
 			</table>
 		</div>
-		<div v-show="!state.working && errorCode">
+		<div v-show="!$store.state.working && errorCode">
 			<p>ERROR #{{errorCode}}: <q>{{errorMessage}}</q></p>
 		</div>
 	</div>
@@ -63,12 +63,10 @@
 
 <script>
 const ContainerStatus = require('./ContainerStatus.js');
-const store = require('./store.js');
 
 module.exports = {
 	data: function() {
 		return {
-			state: store.state,
 			ready: true,
 			title: 'Docker Containers',
 			list: [],
@@ -83,7 +81,7 @@ module.exports = {
 	},
 	methods: {
 		update() {
-			store.commit('startWorking');
+			this.$store.commit('START_WORKING');
 			this.checked = {};
 			this.hasChecked = false;
 
@@ -98,7 +96,7 @@ module.exports = {
 			});
 
 			cmd.on('close', (code)=>{
-				store.commit('finishWorking');
+				this.$store.commit('FINISH_FORKING');
 				this.errorCode = code;
 			});
 		},
