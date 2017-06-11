@@ -31,7 +31,7 @@
 		<div v-show="$store.state.working">
 			...
 		</div>
-		<div v-show="!$store.state.working && list && list.length > 0">
+		<div v-show="!$store.state.working && $store.state.list && $store.state.list.length > 0">
 			<table class="the-table">
 				<thead>
 					<tr>
@@ -44,7 +44,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr v-for="d in list" :class="getClassesFor(d)">
+					<tr v-for="d in $store.state.list" :class="getClassesFor(d)">
 						<td><input v-model="checked[d.id]" @click="checked_onclick" type="checkbox" /></td>
 						<td>{{d.id}}</td>
 						<td>{{d.image}}</td>
@@ -69,7 +69,6 @@ module.exports = {
 		return {
 			ready: true,
 			title: 'Docker Containers',
-			list: [],
 			checked: {},
 			hasChecked: false,
 			errorCode: 0,
@@ -88,7 +87,7 @@ module.exports = {
 			const cmd = spawn('docker', ['ps', '-a', '--format', ContainerStatus.format]);
 
 			cmd.stdout.on('data', (data)=>{
-				this.list = this.createContainerStatusList(data);
+				this.$store.dispatch('setListFromStdout', data);
 			});
 
 			cmd.stderr.on('data', (data)=>{

@@ -27,8 +27,9 @@ ContainerStatus.fromCLIResult = function(line) {
 	ContainerStatus.keys.forEach((key, index)=>{
 		options[key] = arr[index];
 	});
-	const instance = new ContainerStatus(options);
-	return instance;
+	return options;
+	// const instance = new ContainerStatus(options);
+	// return instance;
 };
 
 module.exports = ContainerStatus;
