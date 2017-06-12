@@ -7,6 +7,7 @@
     "dev-front": "watchify -dv -t vueify -e front/index.js -o build/front.js",
     "run": "electron .",
     "lint": "eslint ./main.js front/*.js",
+    "postinstall": "mkdir build || true",
     "start": "npm run lint && concurrently \"npm run run -s\" \"npm run dev-front -s\""
   },
   "dependencies": {
