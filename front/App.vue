@@ -32,28 +32,7 @@
 			...
 		</div>
 		<div v-show="!$store.state.working && $store.state.list && $store.state.list.length > 0">
-			<table class="the-table">
-				<thead>
-					<tr>
-						<th></th>
-						<th>ID</th>
-						<th>Image</th>
-						<th>Names</th>
-						<th>Created At</th>
-						<th>Status</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr v-for="d in $store.state.list" :class="getClassesFor(d)">
-						<td><input v-model="$store.state.checked[d.id]" type="checkbox" /></td>
-						<td>{{d.id}}</td>
-						<td>{{d.image}}</td>
-						<td>{{d.names}}</td>
-						<td>{{d.createdAt}}</td>
-						<td>{{d.status}}</td>
-					</tr>
-				</tbody>
-			</table>
+			<container-status-table></container-status-table>
 		</div>
 		<div v-show="!$store.state.working && errorCode">
 			<p>ERROR #{{errorCode}}: <q>{{errorMessage}}</q></p>
@@ -62,9 +41,13 @@
 </template>
 
 <script>
+const ContainerStatusTable = require('./ContainerStatusTable.vue');
 const ContainerStatus = require('./ContainerStatus.js');
 
 module.exports = {
+	components: {
+		ContainerStatusTable,
+	},
 	data: function() {
 		return {
 			ready: true,
