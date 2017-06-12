@@ -24,14 +24,14 @@
 <template>
 	<div>
 		<h1>Docker Containers</h1>
-		<p>
-			<button @click="update_onclick">Update</button>
-			<button @click="remove_onclick" :disabled="!$store.getters.someChecked">Remove</button>
-		</p>
 		<div v-show="$store.state.working">
 			...
 		</div>
 		<div v-show="!$store.state.working && $store.state.list && $store.state.list.length > 0">
+			<p>
+				<button @click="update_onclick">Update</button>
+				<button @click="remove_onclick" :disabled="!$store.getters.someChecked">Remove</button>
+			</p>
 			<container-status-table></container-status-table>
 		</div>
 		<div v-show="!$store.state.working && $store.state.errorCode">
