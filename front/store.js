@@ -14,6 +14,31 @@ module.exports = new Vuex.Store({
 	},
 
 	getters: {
+		allIds(state) {
+			return Object.keys(state.checked);
+		},
+
+		doneIds(state, getters) {
+			return getters.allIds.filter(id=>{
+				const row = state.list.find(d=>d.id===id);
+				return row.status.startsWith('Exited ');
+			});
+		},
+
+		errorIds(state, getters) {
+			return getters.doneIds.filter(id=>{
+				const row = state.list.find(d=>d.id===id);
+				return !row.status.startsWith('Exited (0) ');
+			});
+		},
+
+		runningIds(state, getters) {
+			return getters.allIds.filter(id=>{
+				const row = state.list.find(d=>d.id===id);
+				return row.status.startsWith('Up ');
+			});
+		},
+
 		someChecked(state) {
 			return Object.values(state.checked).some(d=>d);
 		},
@@ -38,6 +63,10 @@ module.exports = new Vuex.Store({
 
 		RESET_CHECKED(state) {
 			state.checked = state.list.reduce((s,d)=>(s[d.id]=false,s), {});
+		},
+
+		SET_CHECKED(state, payload) {
+			state.checked[payload.id] = payload.checked;
 		},
 
 		SET_ERROR_CODE(state, value) {
@@ -77,6 +106,25 @@ module.exports = new Vuex.Store({
 
 			commit('SET_LIST', list);
 			commit('RESET_CHECKED');
+		},
+
+		selectNone({ getters, commit }) {
+			getters.allIds.forEach(id=>commit('SET_CHECKED', { id: id, checked: false }));
+		},
+
+		selectDoneItems({ getters, commit, dispatch }) {
+			dispatch('selectNone');
+			getters.doneIds.forEach(id=>commit('SET_CHECKED', { id: id, checked: true }));
+		},
+
+		selectErrorItems({ getters, commit, dispatch }) {
+			dispatch('selectNone');
+			getters.errorIds.forEach(id=>commit('SET_CHECKED', { id: id, checked: true }));
+		},
+
+		selectRunningItems({ getters, commit, dispatch }) {
+			dispatch('selectNone');
+			getters.runningIds.forEach(id=>commit('SET_CHECKED', { id: id, checked: true }));
 		},
 	},
 });
