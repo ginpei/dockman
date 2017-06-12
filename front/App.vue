@@ -28,10 +28,7 @@
 			...
 		</div>
 		<div v-show="!$store.state.working && $store.state.list && $store.state.list.length > 0">
-			<p>
-				<button @click="update_onclick">Update</button>
-				<button @click="remove_onclick" :disabled="!$store.getters.someChecked">Remove</button>
-			</p>
+			<container-status-bulk-editor></container-status-bulk-editor>
 			<container-status-table></container-status-table>
 		</div>
 		<div v-show="!$store.state.working && $store.state.errorCode">
@@ -41,28 +38,17 @@
 </template>
 
 <script>
+const ContainerStatusBulkEditor = require('./ContainerStatusBulkEditor.vue');
 const ContainerStatusTable = require('./ContainerStatusTable.vue');
 const ContainerStatus = require('./ContainerStatus.js');
 
 module.exports = {
 	components: {
+		ContainerStatusBulkEditor,
 		ContainerStatusTable,
 	},
 	mounted: function() {
 		this.$store.dispatch('update');
-	},
-	methods: {
-		update_onclick(event) {
-			this.$store.dispatch('update');
-		},
-
-		remove_onclick(event) {
-			const ids = this.$store.getters.checkedIds;
-			const cmd = spawn('docker', ['rm', ids.join(' ')]);
-			cmd.on('close', (code)=>{
-				this.$store.dispatch('update');
-			});
-		},
 	},
 };
 </script>
