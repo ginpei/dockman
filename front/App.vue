@@ -23,7 +23,7 @@
 
 <template>
 	<div>
-		<h1>{{title}}</h1>
+		<h1>Docker Containers</h1>
 		<p>
 			<button @click="update_onclick">Update</button>
 			<button @click="remove_onclick" :disabled="!$store.getters.someChecked">Remove</button>
@@ -47,11 +47,6 @@ const ContainerStatus = require('./ContainerStatus.js');
 module.exports = {
 	components: {
 		ContainerStatusTable,
-	},
-	data: function() {
-		return {
-			title: 'Docker Containers',
-		};
 	},
 	mounted: function() {
 		this.$store.dispatch('update');
