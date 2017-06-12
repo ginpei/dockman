@@ -9,6 +9,8 @@ module.exports = new Vuex.Store({
 		working: true,
 		list: [],
 		checked: {},
+		errorCode: 0,
+		errorMessage: '',
 	},
 
 	getters: {
@@ -37,6 +39,14 @@ module.exports = new Vuex.Store({
 		RESET_CHECKED(state) {
 			state.checked = state.list.reduce((s,d)=>(s[d.id]=false,s), {});
 		},
+
+		SET_ERROR_CODE(state, value) {
+			state.errorCode = value;
+		},
+
+		SET_ERROR_MESSAGE(state, value) {
+			state.errorMessage = value;
+		},
 	},
 
 	actions: {
@@ -50,12 +60,12 @@ module.exports = new Vuex.Store({
 			});
 
 			cmd.stderr.on('data', (data)=>{
-				this.errorMessage = data.toString();
+				commit('SET_ERROR_MESSAGE', data.toString());
 			});
 
 			cmd.on('close', (code)=>{
 				commit('FINISH_FORKING');
-				this.errorCode = code;
+				commit('SET_ERROR_CODE', code);
 			});
 		},
 

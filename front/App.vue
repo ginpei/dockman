@@ -34,8 +34,8 @@
 		<div v-show="!$store.state.working && $store.state.list && $store.state.list.length > 0">
 			<container-status-table></container-status-table>
 		</div>
-		<div v-show="!$store.state.working && errorCode">
-			<p>ERROR #{{errorCode}}: <q>{{errorMessage}}</q></p>
+		<div v-show="!$store.state.working && $store.state.errorCode">
+			<p>ERROR #{{$store.state.errorCode}}: <q>{{$store.state.errorMessage}}</q></p>
 		</div>
 	</div>
 </template>
@@ -52,8 +52,6 @@ module.exports = {
 		return {
 			ready: true,
 			title: 'Docker Containers',
-			errorCode: 0,
-			errorMessage: '',
 		};
 	},
 	mounted: function() {
