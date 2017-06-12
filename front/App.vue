@@ -57,37 +57,18 @@ module.exports = {
 		};
 	},
 	mounted: function() {
-		this.update();
+		this.$store.dispatch('update');
 	},
 	methods: {
-		update() {
-			this.$store.commit('START_WORKING');
-
-			const cmd = spawn('docker', ['ps', '-a', '--format', ContainerStatus.format]);
-
-			cmd.stdout.on('data', (data)=>{
-				this.$store.dispatch('setListFromStdout', data);
-			});
-
-			cmd.stderr.on('data', (data)=>{
-				this.errorMessage = data.toString();
-			});
-
-			cmd.on('close', (code)=>{
-				this.$store.commit('FINISH_FORKING');
-				this.errorCode = code;
-			});
-		},
-
 		update_onclick(event) {
-			this.update();
+			this.$store.dispatch('update');
 		},
 
 		remove_onclick(event) {
 			const ids = this.$store.getters.checkedIds;
 			const cmd = spawn('docker', ['rm', ids.join(' ')]);
 			cmd.on('close', (code)=>{
-				this.update();
+				this.$store.dispatch('update');
 			});
 		},
 	},

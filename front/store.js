@@ -40,6 +40,25 @@ module.exports = new Vuex.Store({
 	},
 
 	actions: {
+		update({ commit, dispatch }) {
+			commit('START_WORKING');
+
+			const cmd = spawn('docker', ['ps', '-a', '--format', ContainerStatus.format]);
+
+			cmd.stdout.on('data', (data)=>{
+				dispatch('setListFromStdout', data);
+			});
+
+			cmd.stderr.on('data', (data)=>{
+				this.errorMessage = data.toString();
+			});
+
+			cmd.on('close', (code)=>{
+				commit('FINISH_FORKING');
+				this.errorCode = code;
+			});
+		},
+
 		setListFromStdout({ commit }, data) {
 			const list = data.toString()
 				.split('\n')
