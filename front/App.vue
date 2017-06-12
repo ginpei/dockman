@@ -26,7 +26,7 @@
 		<h1>{{title}}</h1>
 		<p>
 			<button @click="update_onclick">Update</button>
-			<button @click="remove_onclick" v-bind:disabled="!hasChecked">Remove</button>
+			<button @click="remove_onclick" :disabled="!$store.getters.someChecked">Remove</button>
 		</p>
 		<div v-show="$store.state.working">
 			...
@@ -45,7 +45,7 @@
 				</thead>
 				<tbody>
 					<tr v-for="d in $store.state.list" :class="getClassesFor(d)">
-						<td><input v-model="checked[d.id]" @click="checked_onclick" type="checkbox" /></td>
+						<td><input v-model="$store.state.checked[d.id]" type="checkbox" /></td>
 						<td>{{d.id}}</td>
 						<td>{{d.image}}</td>
 						<td>{{d.names}}</td>
@@ -69,8 +69,6 @@ module.exports = {
 		return {
 			ready: true,
 			title: 'Docker Containers',
-			checked: {},
-			hasChecked: false,
 			errorCode: 0,
 			errorMessage: '',
 		};
@@ -81,8 +79,6 @@ module.exports = {
 	methods: {
 		update() {
 			this.$store.commit('START_WORKING');
-			this.checked = {};
-			this.hasChecked = false;
 
 			const cmd = spawn('docker', ['ps', '-a', '--format', ContainerStatus.format]);
 
@@ -120,15 +116,11 @@ module.exports = {
 		},
 
 		remove_onclick(event) {
-			const ids = Object.keys(this.checked);
+			const ids = this.$store.getters.checkedIds;
 			const cmd = spawn('docker', ['rm', ids.join(' ')]);
 			cmd.on('close', (code)=>{
 				this.update();
 			});
-		},
-
-		checked_onclick(event) {
-			this.hasChecked = Object.values(this.checked).some(d=>d);
 		},
 	},
 };

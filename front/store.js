@@ -8,6 +8,17 @@ module.exports = new Vuex.Store({
 	state: {
 		working: true,
 		list: [],
+		checked: {},
+	},
+
+	getters: {
+		someChecked(state) {
+			return Object.values(state.checked).some(d=>d);
+		},
+
+		checkedIds(state) {
+			return Object.keys(state.checked).filter(id=>state.checked[id]);
+		},
 	},
 
 	mutations: {
@@ -22,6 +33,10 @@ module.exports = new Vuex.Store({
 		SET_LIST(state, list) {
 			state.list = list;
 		},
+
+		RESET_CHECKED(state) {
+			state.checked = state.list.reduce((s,d)=>(s[d.id]=false,s), {});
+		},
 	},
 
 	actions: {
@@ -32,6 +47,7 @@ module.exports = new Vuex.Store({
 				.filter(d=>d);
 
 			commit('SET_LIST', list);
+			commit('RESET_CHECKED');
 		},
 	},
 });
