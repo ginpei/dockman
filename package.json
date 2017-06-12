@@ -1,14 +1,14 @@
 {
+  "name": "Dockman",
+  "private": true,
+  "version": "0.0.0",
+  "main": "main.js",
   "scripts": {
     "dev-front": "watchify -dv -t vueify -e front/index.js -o build/front.js",
     "run": "electron .",
     "lint": "eslint ./main.js front/*.js",
     "start": "npm run lint && concurrently \"npm run run -s\" \"npm run dev-front -s\""
   },
-  "name": "Dockman",
-  "private": true,
-  "version": "0.0.0",
-  "main": "main.js",
   "dependencies": {
     "browserify": "^14.4.0",
     "electron": "^1.6.10",
