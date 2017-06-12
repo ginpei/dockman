@@ -3,6 +3,7 @@
 		<p>
 			<button @click="update_onclick"><i class="fa fa-refresh" aria-hidden="true"></i> Update</button>
 			<button @click="remove_onclick" :disabled="!$store.getters.someChecked"><i class="fa fa-trash" aria-hidden="true"></i> Remove</button>
+			<button @click="stop_onclick" :disabled="!$store.getters.someChecked"><i class="fa fa-stop-circle" aria-hidden="true"></i> Stop</button>
 		</p>
 		<p>
 			Select:
@@ -24,6 +25,14 @@ module.exports = {
 		remove_onclick(event) {
 			const ids = this.$store.getters.checkedIds;
 			const cmd = spawn('docker', ['rm', ids.join(' ')]);
+			cmd.on('close', (code)=>{
+				this.$store.dispatch('update');
+			});
+		},
+
+		stop_onclick(event) {
+			const ids = this.$store.getters.checkedIds;
+			const cmd = spawn('docker', ['stop', ids.join(' ')]);
 			cmd.on('close', (code)=>{
 				this.$store.dispatch('update');
 			});
