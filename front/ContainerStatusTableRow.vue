@@ -12,11 +12,6 @@
 <script>
 module.exports = {
 	props: ['d'],
-	data() {
-		return {
-			checked: this.$store.state.checked[this.d.id],
-		};
-	},
 
 	computed: {
 		classes() {
