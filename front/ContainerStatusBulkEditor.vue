@@ -1,7 +1,7 @@
 <template>
 	<p>
-		<button @click="update_onclick">Update</button>
-		<button @click="remove_onclick" :disabled="!$store.getters.someChecked">Remove</button>
+		<button @click="update_onclick"><i class="fa fa-refresh" aria-hidden="true"></i> Update</button>
+		<button @click="remove_onclick" :disabled="!$store.getters.someChecked"><i class="fa fa-trash" aria-hidden="true"></i> Remove</button>
 	</p>
 </template>
 
