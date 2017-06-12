@@ -1,5 +1,5 @@
 <template>
-	<tr :class="getClassesFor(d)">
+	<tr :class="classes">
 		<td><input v-model="$store.state.checked[d.id]" type="checkbox" /></td>
 		<td>{{d.id}}</td>
 		<td>{{d.image}}</td>
@@ -18,14 +18,16 @@ module.exports = {
 		};
 	},
 
-	methods: {
-		getClassesFor(d) {
-			const classes = {
-				'is-stopped': d.stopped,
-				'is-working': d.working,
+	computed: {
+		classes() {
+			return {
+				'is-stopped': this.d.status.startsWith('Exited '),
+				'is-working': this.d.status.startsWith('Up '),
 			};
-			return classes;
 		},
+	},
+
+	methods: {
 	},
 };
 </script>
