@@ -27,11 +27,11 @@
 		<div v-show="$store.state.working">
 			...
 		</div>
-		<div v-show="!$store.state.working && $store.state.list && $store.state.list.length > 0">
+		<div v-show="tableAvailable">
 			<container-status-bulk-editor></container-status-bulk-editor>
 			<container-status-table></container-status-table>
 		</div>
-		<div v-show="!$store.state.working && $store.state.errorCode">
+		<div v-show="errored">
 			<p>ERROR #{{$store.state.errorCode}}: <q>{{$store.state.errorMessage}}</q></p>
 		</div>
 	</div>
@@ -49,6 +49,17 @@ module.exports = {
 	},
 	mounted: function() {
 		this.$store.dispatch('update');
+	},
+	computed: {
+		tableAvailable() {
+			const s = this.$store.state;
+			return !s.working && s.list.length > 0;
+		},
+
+		errored() {
+			const s = this.$store.state;
+			return !s.working && s.errorCode;
+		},
 	},
 };
 </script>
