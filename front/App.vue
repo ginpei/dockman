@@ -79,21 +79,6 @@ module.exports = {
 			});
 		},
 
-		createContainerStatusList(data) {
-			return data.toString()
-				.split('\n')
-				.map(d=>ContainerStatus.fromCLIResult(d))
-				.filter(d=>d);
-		},
-
-		getClassesFor(containerStatus) {
-			const classes = {
-				'is-stopped': containerStatus.stopped,
-				'is-working': containerStatus.working,
-			};
-			return classes;
-		},
-
 		update_onclick(event) {
 			this.update();
 		},
