@@ -50,7 +50,6 @@ module.exports = {
 	},
 	data: function() {
 		return {
-			ready: true,
 			title: 'Docker Containers',
 		};
 	},
