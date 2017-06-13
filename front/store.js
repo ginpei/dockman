@@ -1,3 +1,5 @@
+/* global spawn */
+
 const Vue = require('vue');
 const Vuex = require('vuex');
 const ContainerStatus = require('./ContainerStatus.js');  // TODO remove
@@ -62,7 +64,10 @@ module.exports = new Vuex.Store({
 		},
 
 		RESET_CHECKED(state) {
-			state.checked = state.list.reduce((s,d)=>(s[d.id]=false,s), {});
+			state.checked = state.list.reduce((s, d)=>{
+				s[d.id] = false;
+				return s;
+			}, {});
 		},
 
 		SET_CHECKED(state, payload) {
