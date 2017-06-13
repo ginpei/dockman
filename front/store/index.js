@@ -2,7 +2,7 @@
 
 const Vue = require('vue');
 const Vuex = require('vuex');
-const ContainerStatus = require('./ContainerStatus.js');  // TODO remove
+const ContainerStatus = require('../ContainerStatus.js');  // TODO remove
 
 Vue.use(Vuex);
 
