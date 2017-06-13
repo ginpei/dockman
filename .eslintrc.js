@@ -212,7 +212,7 @@ module.exports = {
 			"error",
 			"always"
 		],
-		"object-property-newline": "error",
+		"object-property-newline": "off",
 		"object-shorthand": "off",
 		"one-var": "off",
 		"one-var-declaration-per-line": "error",
