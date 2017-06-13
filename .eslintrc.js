@@ -137,7 +137,12 @@ module.exports = {
 		"no-magic-numbers": "off",
 		"no-mixed-operators": "error",
 		"no-mixed-requires": "error",
-		"no-multi-spaces": "error",
+		"no-multi-spaces": [
+			"error",
+			{
+				"ignoreEOLComments": true,
+			},
+		],
 		"no-multi-str": "error",
 		"no-multiple-empty-lines": "error",
 		"no-native-reassign": "error",
