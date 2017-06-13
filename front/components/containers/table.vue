@@ -33,7 +33,7 @@
 </template>
 
 <script>
-const ContainerStatusTableRow = require('./ContainerStatusTableRow.vue');
+const ContainerStatusTableRow = require('./table_row.vue');
 
 module.exports = {
 	components: {

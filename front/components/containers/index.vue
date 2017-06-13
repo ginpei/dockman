@@ -39,9 +39,9 @@
 </template>
 
 <script>
-const ContainerStatusBulkEditor = require('./ContainerStatusBulkEditor.vue');
-const ContainerStatusTable = require('./ContainerStatusTable.vue');
-const ContainerStatus = require('./ContainerStatus.js');
+const ContainerStatusBulkEditor = require('./bulk_editor.vue');
+const ContainerStatusTable = require('./table.vue');
+const ContainerStatus = require('../../ContainerStatus.js');
 
 module.exports = {
 	components: {

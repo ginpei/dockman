@@ -1,5 +1,5 @@
-const ContainersIndex = require('./ContainersIndex.vue');
-const Home = require('./Home.vue');
+const ContainersIndex = require('./components/containers/index.vue');
+const Home = require('./components/misc/Home.vue');
 const Vue = require('vue');
 const VueRouter = require('vue-router');
 
