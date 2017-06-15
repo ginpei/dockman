@@ -1,7 +1,7 @@
 <template>
 	<base-layout>
 		<div class="container">
-			<h1 class="title">Docker Containers</h1>
+			<h1 class="title">Containers</h1>
 			<div v-show="$store.state.working">
 				...
 			</div>
