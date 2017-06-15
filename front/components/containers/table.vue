@@ -1,29 +1,13 @@
-<style>
-.the-table {
-	border-collapse: collapse;
-}
-.the-table > thead > tr > th {
-	border-bottom: 2px solid #ccc;
-}
-.the-table > tbody > tr:hover {
-	background-color: #ffe;
-}
-.the-table > tbody > tr > td {
-	border-top: 1px solid #ccc;
-	padding: 0.4em;
-}
-</style>
-
 <template>
-	<table class="the-table">
+	<table class="the-table mdl-data-table">
 		<thead>
 			<tr>
 				<th></th>
-				<th>ID</th>
-				<th>Image</th>
-				<th>Names</th>
-				<th>Created At</th>
-				<th>Status</th>
+				<th class="mdl-data-table__cell--non-numeric">ID</th>
+				<th class="mdl-data-table__cell--non-numeric">Image</th>
+				<th class="mdl-data-table__cell--non-numeric">Names</th>
+				<th class="mdl-data-table__cell--non-numeric">Created At</th>
+				<th class="mdl-data-table__cell--non-numeric">Status</th>
 			</tr>
 		</thead>
 		<tbody>

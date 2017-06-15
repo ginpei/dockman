@@ -13,6 +13,7 @@
 	overflow: hidden;
 	position: fixed;
 	width: var(--haba);
+	z-index: 1;  /* to prevent MDL table cells from coming over */
 }
 
 .menu-item {

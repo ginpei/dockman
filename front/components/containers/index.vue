@@ -1,26 +1,3 @@
-<style>
-.the-table {
-	border-collapse: collapse;
-}
-.the-table > thead > tr > th {
-	border-bottom: 2px solid #ccc;
-}
-.the-table > tbody > tr:hover {
-	background-color: #ffe;
-}
-.the-table > tbody > tr > td {
-	border-top: 1px solid #ccc;
-	padding: 0.4em;
-}
-
-.is-working {
-	font-weight: bold;
-}
-.is-stopped {
-	color: #333;
-}
-</style>
-
 <template>
 	<base-layout>
 		<h1>Docker Containers</h1>

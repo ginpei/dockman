@@ -1,11 +1,11 @@
 <template>
 	<tr :class="classes">
-		<td><input v-model="$store.state.checked[d.id]" type="checkbox" /></td>
-		<td>{{d.id}}</td>
-		<td>{{d.image}}</td>
-		<td>{{d.names}}</td>
-		<td>{{d.createdAt}}</td>
-		<td>{{d.status}}</td>
+		<td class="mdl-data-table__cell--non-numeric"><input v-model="$store.state.checked[d.id]" type="checkbox" /></td>
+		<td class="mdl-data-table__cell--non-numeric">{{d.id}}</td>
+		<td class="mdl-data-table__cell--non-numeric">{{d.image}}</td>
+		<td class="mdl-data-table__cell--non-numeric">{{d.names}}</td>
+		<td class="mdl-data-table__cell--non-numeric">{{d.createdAt}}</td>
+		<td class="mdl-data-table__cell--non-numeric">{{d.status}}</td>
 	</tr>
 </template>
 
