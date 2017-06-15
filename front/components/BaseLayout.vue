@@ -22,7 +22,7 @@
 	--size: calc(var(--haba) - var(--margin) * 2);
 
 	background-color: #fff;
-	background-size: cover;
+	background-size: contain;
 	background-position: center center;
 	border-radius: calc(var(--haba) / 10);
 	border: 2px solid var(--color-fore);
