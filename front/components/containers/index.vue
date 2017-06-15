@@ -22,7 +22,7 @@
 </style>
 
 <template>
-	<div>
+	<base-layout>
 		<router-link to="/">Home</router-link>
 		<h1>Docker Containers</h1>
 		<div v-show="$store.state.working">
@@ -35,16 +35,18 @@
 		<div v-show="errored">
 			<p>ERROR #{{$store.state.errorCode}}: <q>{{$store.state.errorMessage}}</q></p>
 		</div>
-	</div>
+	</base-layout>
 </template>
 
 <script>
+const BaseLayout = require('../BaseLayout.vue');
 const ContainerStatusBulkEditor = require('./bulk_editor.vue');
 const ContainerStatusTable = require('./table.vue');
 const ContainerStatus = require('../../ContainerStatus.js');
 
 module.exports = {
 	components: {
+		BaseLayout,
 		ContainerStatusBulkEditor,
 		ContainerStatusTable,
 	},
