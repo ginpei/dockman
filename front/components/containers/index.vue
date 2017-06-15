@@ -1,15 +1,17 @@
 <template>
 	<base-layout>
-		<h1>Docker Containers</h1>
-		<div v-show="$store.state.working">
-			...
-		</div>
-		<div v-show="tableAvailable">
-			<container-status-bulk-editor></container-status-bulk-editor>
-			<container-status-table></container-status-table>
-		</div>
-		<div v-show="errored">
-			<p>ERROR #{{$store.state.errorCode}}: <q>{{$store.state.errorMessage}}</q></p>
+		<div class="container">
+			<h1 class="title">Docker Containers</h1>
+			<div v-show="$store.state.working">
+				...
+			</div>
+			<div v-show="tableAvailable">
+				<container-status-bulk-editor></container-status-bulk-editor>
+				<container-status-table></container-status-table>
+			</div>
+			<div v-show="errored">
+				<p>ERROR #{{$store.state.errorCode}}: <q>{{$store.state.errorMessage}}</q></p>
+			</div>
 		</div>
 	</base-layout>
 </template>

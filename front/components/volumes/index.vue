@@ -1,6 +1,8 @@
 <template>
 	<base-layout>
-		<h1>Volumes</h1>
+		<div class="container">
+			<h1 class="title">Volumes</h1>
+		</div>
 	</base-layout>
 </template>
 
