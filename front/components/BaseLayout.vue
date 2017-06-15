@@ -21,18 +21,37 @@
 	--margin: 1px;
 	--size: calc(var(--haba) - var(--margin) * 2);
 
-	background-color: var(--color-back);
+	background-color: #fff;
+	background-size: cover;
+	background-position: center center;
 	border-radius: calc(var(--haba) / 10);
 	border: 2px solid var(--color-fore);
 	box-sizing: border-box;
 	color: 2px solid var(--color-fore);
 	display: block;
+	font-size: 0;
 	height: var(--size);
 	line-height: var(--haba);
 	margin: var(--margin);
 	text-align: center;
 	text-decoration: none;
 	width: var(--size);
+}
+
+.menu-item-home {
+	background-image: url("./images/ic-home.png");
+}
+
+.menu-item-images {
+	background-image: url("./images/ic-images.png");
+}
+
+.menu-item-containers {
+	background-image: url("./images/ic-containers.png");
+}
+
+.menu-item-volumes {
+	background-image: url("./images/ic-volumes.png");
 }
 
 .content {
@@ -43,10 +62,10 @@
 <template>
 	<div class="wrapper">
 		<div class="menu">
-			<router-link to="/" class="menu-item">H</router-link>
-			<router-link to="/images/" class="menu-item">I</router-link>
-			<router-link to="/containers/" class="menu-item">C</router-link>
-			<router-link to="/volumes/" class="menu-item">V</router-link>
+			<router-link to="/" class="menu-item menu-item-home">Home</router-link>
+			<router-link to="/images/" class="menu-item menu-item-images">Images</router-link>
+			<router-link to="/containers/" class="menu-item menu-item-containers">Containers</router-link>
+			<router-link to="/volumes/" class="menu-item menu-item-volumes">Volumes</router-link>
 		</div>
 		<div class="content">
 			<slot></slot>
