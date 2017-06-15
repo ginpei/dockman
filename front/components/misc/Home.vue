@@ -1,19 +1,21 @@
 <template>
-	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-		<header class="mdl-layout__header">
-			<div class="mdl-layout__header-row">
-				<span class="mdl-layout-title">Dockman</span>
-				<div class="mdl-layout-spacer"></div>
-				<nav class="mdl-navigation mdl-layout--large-screen-only">
-					<router-link to="/containers/" class="mdl-navigation__link">Images</router-link>
-					<router-link to="/containers/" class="mdl-navigation__link">Containers</router-link>
-					<router-link to="/containers/" class="mdl-navigation__link">Volumes</router-link>
-				</nav>
-			</div>
-		</header>
-		<main class="mdl-layout__content">
-		</main>
-	</div>
+	<base-layout>
+		<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+			<header class="mdl-layout__header">
+				<div class="mdl-layout__header-row">
+					<span class="mdl-layout-title">Dockman</span>
+					<div class="mdl-layout-spacer"></div>
+					<nav class="mdl-navigation mdl-layout--large-screen-only">
+						<router-link to="/containers/" class="mdl-navigation__link">Images</router-link>
+						<router-link to="/containers/" class="mdl-navigation__link">Containers</router-link>
+						<router-link to="/containers/" class="mdl-navigation__link">Volumes</router-link>
+					</nav>
+				</div>
+			</header>
+			<main class="mdl-layout__content">
+			</main>
+		</div>
+	</base-layout>
 </template>
 
 <style scoped>
@@ -26,3 +28,13 @@ main {
 	opacity: 0.3;
 }
 </style>
+
+<script>
+const BaseLayout = require('../BaseLayout.vue');
+
+module.exports = {
+	components: {
+		BaseLayout,
+	},
+};
+</script>
