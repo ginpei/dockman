@@ -23,7 +23,6 @@
 
 <template>
 	<base-layout>
-		<router-link to="/">Home</router-link>
 		<h1>Docker Containers</h1>
 		<div v-show="$store.state.working">
 			...
