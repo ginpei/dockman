@@ -44,9 +44,9 @@
 	<div class="wrapper">
 		<div class="menu">
 			<router-link to="/" class="menu-item">H</router-link>
-			<div class="menu-item">I</div>
+			<router-link to="/images/" class="menu-item">I</router-link>
 			<router-link to="/containers/" class="menu-item">C</router-link>
-			<div class="menu-item">V</div>
+			<router-link to="/volumes/" class="menu-item">V</router-link>
 		</div>
 		<div class="content">
 			<slot></slot>
