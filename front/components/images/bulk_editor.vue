@@ -7,9 +7,7 @@
 		<p>
 			Select:
 			<button @click="selectNone_click" class="link">None</button>
-			<button @click="selectDoneItems_click" class="link">Done</button>
-			<button @click="selectErrorItems_click" class="link">Error</button>
-			<button @click="selectRunningItems_click" class="link">Running</button>
+			<button @click="selectNoNameItems_click" class="link">No Names</button>
 		</p>
 	</div>
 </template>
@@ -27,19 +25,11 @@ module.exports = {
 		},
 
 		selectNone_click(event) {
-			this.$store.dispatch('container/selectNone');
+			this.$store.dispatch('image/selectNone');
 		},
 
-		selectDoneItems_click(event) {
-			this.$store.dispatch('container/selectDoneItems');
-		},
-
-		selectErrorItems_click(event) {
-			this.$store.dispatch('container/selectErrorItems');
-		},
-
-		selectRunningItems_click(event) {
-			this.$store.dispatch('container/selectRunningItems');
+		selectNoNameItems_click(event) {
+			this.$store.dispatch('image/selectNoNameItems');
 		},
 	},
 };

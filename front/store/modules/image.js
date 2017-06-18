@@ -14,24 +14,10 @@ module.exports = {
 			return Object.keys(state.checked);
 		},
 
-		doneIds(state, getters) {
+		noNameIds(state, getters) {
 			return getters.allIds.filter(id=>{
 				const row = state.images.find(d=>d.id===id);
-				return row.status.startsWith('Exited ');
-			});
-		},
-
-		errorIds(state, getters) {
-			return getters.doneIds.filter(id=>{
-				const row = state.images.find(d=>d.id===id);
-				return !row.status.startsWith('Exited (0) ');
-			});
-		},
-
-		runningIds(state, getters) {
-			return getters.allIds.filter(id=>{
-				const row = state.images.find(d=>d.id===id);
-				return row.status.startsWith('Up ');
+				return row.repository === '<none>';
 			});
 		},
 
@@ -147,19 +133,9 @@ module.exports = {
 			getters.allIds.forEach(id=>commit('SET_CHECKED', { id: id, checked: false }));
 		},
 
-		selectDoneItems({ getters, commit, dispatch }) {
+		selectNoNameItems({ getters, commit, dispatch }) {
 			dispatch('selectNone');
-			getters.doneIds.forEach(id=>commit('SET_CHECKED', { id: id, checked: true }));
-		},
-
-		selectErrorItems({ getters, commit, dispatch }) {
-			dispatch('selectNone');
-			getters.errorIds.forEach(id=>commit('SET_CHECKED', { id: id, checked: true }));
-		},
-
-		selectRunningItems({ getters, commit, dispatch }) {
-			dispatch('selectNone');
-			getters.runningIds.forEach(id=>commit('SET_CHECKED', { id: id, checked: true }));
+			getters.noNameIds.forEach(id=>commit('SET_CHECKED', { id: id, checked: true }));
 		},
 	},
 };
