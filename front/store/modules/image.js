@@ -136,6 +136,13 @@ module.exports = {
 			commit('RESET_CHECKED');
 		},
 
+		removeFromIds({ dispatch }, ids) {
+			const cmd = spawn('docker', ['image', 'rm', ids.join(' ')]);
+			cmd.on('close', (code)=>{
+				dispatch('update');
+			});
+		},
+
 		selectNone({ getters, commit }) {
 			getters.allIds.forEach(id=>commit('SET_CHECKED', { id: id, checked: false }));
 		},

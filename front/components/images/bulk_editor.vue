@@ -2,8 +2,7 @@
 	<div>
 		<p>
 			<button @click="update_onclick"><i class="fa fa-refresh" aria-hidden="true"></i> Update</button>
-			<button @click="remove_onclick" :disabled="!$store.getters['container/someChecked']"><i class="fa fa-trash" aria-hidden="true"></i> Remove</button>
-			<button @click="stop_onclick" :disabled="!$store.getters['container/someChecked']"><i class="fa fa-stop-circle" aria-hidden="true"></i> Stop</button>
+			<button @click="remove_onclick" :disabled="!$store.getters['image/someChecked']"><i class="fa fa-trash" aria-hidden="true"></i> Remove</button>
 		</p>
 		<p>
 			Select:
@@ -19,23 +18,12 @@
 module.exports = {
 	methods: {
 		update_onclick(event) {
-			this.$store.dispatch('container/update');
+			this.$store.dispatch('image/update');
 		},
 
 		remove_onclick(event) {
-			const ids = this.$store.getters['container/checkedIds'];
-			const cmd = spawn('docker', ['rm', ids.join(' ')]);
-			cmd.on('close', (code)=>{
-				this.$store.dispatch('container/update');
-			});
-		},
-
-		stop_onclick(event) {
-			const ids = this.$store.getters['container/checkedIds'];
-			const cmd = spawn('docker', ['stop', ids.join(' ')]);
-			cmd.on('close', (code)=>{
-				this.$store.dispatch('container/update');
-			});
+			const ids = this.$store.getters['image/checkedIds'];
+			this.$store.dispatch('image/removeFromIds', ids);
 		},
 
 		selectNone_click(event) {
