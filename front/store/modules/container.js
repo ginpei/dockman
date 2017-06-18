@@ -45,11 +45,11 @@ module.exports = {
 			return Object.keys(state.checked).filter(id=>state.checked[id]);
 		},
 
-		containersAvailable(state) {
+		listAvailable(state) {
 			return !state.working && state.containers.length > 0;
 		},
 
-		containerErrorOccured(state) {
+		errorOccured(state) {
 			return !state.working && state.errorCode;
 		},
 	},

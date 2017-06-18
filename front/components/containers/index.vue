@@ -5,11 +5,11 @@
 			<div v-show="$store.state.container.working">
 				...
 			</div>
-			<div v-show="$store.getters['container/containersAvailable']">
+			<div v-show="$store.getters['container/listAvailable']">
 				<container-status-bulk-editor></container-status-bulk-editor>
 				<container-status-table></container-status-table>
 			</div>
-			<div v-show="$store.getters['container/containerErrorOccured']">
+			<div v-show="$store.getters['container/errorOccured']">
 				<p>ERROR #{{$store.state.container.errorCode}}: <q>{{$store.state.container.errorMessage}}</q></p>
 			</div>
 		</div>
