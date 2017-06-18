@@ -11,7 +11,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<container-status-table-row v-for="d in $store.state.containers" :d="d"></container-status-table-row>
+			<container-status-table-row v-for="d in $store.state.container.containers" :d="d"></container-status-table-row>
 		</tbody>
 	</table>
 </template>

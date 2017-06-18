@@ -2,15 +2,15 @@
 	<base-layout>
 		<div class="container">
 			<h1 class="title">Containers</h1>
-			<div v-show="$store.state.working">
+			<div v-show="$store.state.container.working">
 				...
 			</div>
-			<div v-show="$store.getters.containersAvailable">
+			<div v-show="$store.getters['container/containersAvailable']">
 				<container-status-bulk-editor></container-status-bulk-editor>
 				<container-status-table></container-status-table>
 			</div>
-			<div v-show="$store.getters.containerErrorOccured">
-				<p>ERROR #{{$store.state.errorCode}}: <q>{{$store.state.errorMessage}}</q></p>
+			<div v-show="$store.getters['container/containerErrorOccured']">
+				<p>ERROR #{{$store.state.container.errorCode}}: <q>{{$store.state.container.errorMessage}}</q></p>
 			</div>
 		</div>
 	</base-layout>
@@ -29,7 +29,7 @@ module.exports = {
 		ContainerStatusTable,
 	},
 	mounted: function() {
-		this.$store.dispatch('update');
+		this.$store.dispatch('container/update');
 	},
 };
 </script>
