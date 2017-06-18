@@ -34,7 +34,7 @@ module.exports = {
 	computed: {
 		tableAvailable() {
 			const s = this.$store.state;
-			return !s.working && s.list.length > 0;
+			return !s.working && s.containers.length > 0;
 		},
 
 		errored() {

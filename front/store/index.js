@@ -9,7 +9,7 @@ Vue.use(Vuex);
 module.exports = new Vuex.Store({
 	state: {
 		working: true,
-		list: [],
+		containers: [],
 		checked: {},
 		errorCode: 0,
 		errorMessage: '',
@@ -22,21 +22,21 @@ module.exports = new Vuex.Store({
 
 		doneIds(state, getters) {
 			return getters.allIds.filter(id=>{
-				const row = state.list.find(d=>d.id===id);
+				const row = state.containers.find(d=>d.id===id);
 				return row.status.startsWith('Exited ');
 			});
 		},
 
 		errorIds(state, getters) {
 			return getters.doneIds.filter(id=>{
-				const row = state.list.find(d=>d.id===id);
+				const row = state.containers.find(d=>d.id===id);
 				return !row.status.startsWith('Exited (0) ');
 			});
 		},
 
 		runningIds(state, getters) {
 			return getters.allIds.filter(id=>{
-				const row = state.list.find(d=>d.id===id);
+				const row = state.containers.find(d=>d.id===id);
 				return row.status.startsWith('Up ');
 			});
 		},
@@ -59,12 +59,12 @@ module.exports = new Vuex.Store({
 			state.working = false;
 		},
 
-		SET_LIST(state, list) {
-			state.list = list;
+		SET_CONTAINERS(state, containers) {
+			state.containers = containers;
 		},
 
 		RESET_CHECKED(state) {
-			state.checked = state.list.reduce((s, d)=>{
+			state.checked = state.containers.reduce((s, d)=>{
 				s[d.id] = false;
 				return s;
 			}, {});
@@ -90,7 +90,7 @@ module.exports = new Vuex.Store({
 			const cmd = spawn('docker', ['ps', '-a', '--format', ContainerStatus.format]);
 
 			cmd.stdout.on('data', (data)=>{
-				dispatch('setListFromStdout', data);
+				dispatch('setContainersFromStdout', data);
 			});
 
 			cmd.stderr.on('data', (data)=>{
@@ -103,13 +103,13 @@ module.exports = new Vuex.Store({
 			});
 		},
 
-		setListFromStdout({ commit }, data) {
-			const list = data.toString()
+		setContainersFromStdout({ commit }, data) {
+			const containers = data.toString()
 				.split('\n')
 				.map(d=>ContainerStatus.fromCLIResult(d))
 				.filter(d=>d);
 
-			commit('SET_LIST', list);
+			commit('SET_CONTAINERS', containers);
 			commit('RESET_CHECKED');
 		},
 
