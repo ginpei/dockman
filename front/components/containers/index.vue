@@ -5,11 +5,11 @@
 			<div v-show="$store.state.working">
 				...
 			</div>
-			<div v-show="tableAvailable">
+			<div v-show="$store.getters.containersAvailable">
 				<container-status-bulk-editor></container-status-bulk-editor>
 				<container-status-table></container-status-table>
 			</div>
-			<div v-show="errored">
+			<div v-show="$store.getters.containerErrorOccured">
 				<p>ERROR #{{$store.state.errorCode}}: <q>{{$store.state.errorMessage}}</q></p>
 			</div>
 		</div>
@@ -30,17 +30,6 @@ module.exports = {
 	},
 	mounted: function() {
 		this.$store.dispatch('updateContainers');
-	},
-	computed: {
-		tableAvailable() {
-			const s = this.$store.state;
-			return !s.working && s.containers.length > 0;
-		},
-
-		errored() {
-			const s = this.$store.state;
-			return !s.working && s.errorCode;
-		},
 	},
 };
 </script>

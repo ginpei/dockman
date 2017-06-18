@@ -48,6 +48,14 @@ module.exports = new Vuex.Store({
 		checkedContainerIds(state) {
 			return Object.keys(state.checked).filter(id=>state.checked[id]);
 		},
+
+		containersAvailable(state) {
+			return !state.working && state.containers.length > 0;
+		},
+
+		containerErrorOccured(state) {
+			return !state.working && state.errorCode;
+		},
 	},
 
 	mutations: {
