@@ -29,7 +29,7 @@ module.exports = {
 		ContainerStatusTable,
 	},
 	mounted: function() {
-		this.$store.dispatch('update');
+		this.$store.dispatch('updateContainers');
 	},
 	computed: {
 		tableAvailable() {

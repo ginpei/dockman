@@ -2,8 +2,8 @@
 	<div>
 		<p>
 			<button @click="update_onclick"><i class="fa fa-refresh" aria-hidden="true"></i> Update</button>
-			<button @click="remove_onclick" :disabled="!$store.getters.someChecked"><i class="fa fa-trash" aria-hidden="true"></i> Remove</button>
-			<button @click="stop_onclick" :disabled="!$store.getters.someChecked"><i class="fa fa-stop-circle" aria-hidden="true"></i> Stop</button>
+			<button @click="remove_onclick" :disabled="!$store.getters.someContainersChecked"><i class="fa fa-trash" aria-hidden="true"></i> Remove</button>
+			<button @click="stop_onclick" :disabled="!$store.getters.someContainersChecked"><i class="fa fa-stop-circle" aria-hidden="true"></i> Stop</button>
 		</p>
 		<p>
 			Select:
@@ -19,39 +19,39 @@
 module.exports = {
 	methods: {
 		update_onclick(event) {
-			this.$store.dispatch('update');
+			this.$store.dispatch('updateContainers');
 		},
 
 		remove_onclick(event) {
-			const ids = this.$store.getters.checkedIds;
+			const ids = this.$store.getters.checkedContainerIds;
 			const cmd = spawn('docker', ['rm', ids.join(' ')]);
 			cmd.on('close', (code)=>{
-				this.$store.dispatch('update');
+				this.$store.dispatch('updateContainers');
 			});
 		},
 
 		stop_onclick(event) {
-			const ids = this.$store.getters.checkedIds;
+			const ids = this.$store.getters.checkedContainerIds;
 			const cmd = spawn('docker', ['stop', ids.join(' ')]);
 			cmd.on('close', (code)=>{
-				this.$store.dispatch('update');
+				this.$store.dispatch('updateContainers');
 			});
 		},
 
 		selectNone_click(event) {
-			this.$store.dispatch('selectNone');
+			this.$store.dispatch('selectNoContainers');
 		},
 
 		selectDoneItems_click(event) {
-			this.$store.dispatch('selectDoneItems');
+			this.$store.dispatch('selectDoneContainers');
 		},
 
 		selectErrorItems_click(event) {
-			this.$store.dispatch('selectErrorItems');
+			this.$store.dispatch('selectErrorContainers');
 		},
 
 		selectRunningItems_click(event) {
-			this.$store.dispatch('selectRunningItems');
+			this.$store.dispatch('selectRunningContainers');
 		},
 	},
 };
