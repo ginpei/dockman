@@ -16,36 +16,36 @@ module.exports = new Vuex.Store({
 	},
 
 	getters: {
-		allContainerIds(state) {
+		allIds(state) {
 			return Object.keys(state.checked);
 		},
 
-		doneContainerIds(state, getters) {
-			return getters.allContainerIds.filter(id=>{
+		doneIds(state, getters) {
+			return getters.allIds.filter(id=>{
 				const row = state.containers.find(d=>d.id===id);
 				return row.status.startsWith('Exited ');
 			});
 		},
 
-		errorContainerIds(state, getters) {
-			return getters.doneContainerIds.filter(id=>{
+		errorIds(state, getters) {
+			return getters.doneIds.filter(id=>{
 				const row = state.containers.find(d=>d.id===id);
 				return !row.status.startsWith('Exited (0) ');
 			});
 		},
 
-		runningContainerIds(state, getters) {
-			return getters.allContainerIds.filter(id=>{
+		runningIds(state, getters) {
+			return getters.allIds.filter(id=>{
 				const row = state.containers.find(d=>d.id===id);
 				return row.status.startsWith('Up ');
 			});
 		},
 
-		someContainersChecked(state) {
+		someChecked(state) {
 			return Object.values(state.checked).some(d=>d);
 		},
 
-		checkedContainerIds(state) {
+		checkedIds(state) {
 			return Object.keys(state.checked).filter(id=>state.checked[id]);
 		},
 
@@ -92,7 +92,7 @@ module.exports = new Vuex.Store({
 	},
 
 	actions: {
-		updateContainers({ commit, dispatch }) {
+		update({ commit, dispatch }) {
 			commit('START_WORKING');
 
 			const cmd = spawn('docker', ['ps', '-a', '--format', ContainerStatus.format]);
@@ -121,23 +121,23 @@ module.exports = new Vuex.Store({
 			commit('RESET_CHECKED');
 		},
 
-		selectNoContainers({ getters, commit }) {
-			getters.allContainerIds.forEach(id=>commit('SET_CHECKED', { id: id, checked: false }));
+		selectNone({ getters, commit }) {
+			getters.allIds.forEach(id=>commit('SET_CHECKED', { id: id, checked: false }));
 		},
 
-		selectDoneContainers({ getters, commit, dispatch }) {
-			dispatch('selectNoContainers');
-			getters.doneContainerIds.forEach(id=>commit('SET_CHECKED', { id: id, checked: true }));
+		selectDoneItems({ getters, commit, dispatch }) {
+			dispatch('selectNone');
+			getters.doneIds.forEach(id=>commit('SET_CHECKED', { id: id, checked: true }));
 		},
 
-		selectErrorContainers({ getters, commit, dispatch }) {
-			dispatch('selectNoContainers');
-			getters.errorContainerIds.forEach(id=>commit('SET_CHECKED', { id: id, checked: true }));
+		selectErrorItems({ getters, commit, dispatch }) {
+			dispatch('selectNone');
+			getters.errorIds.forEach(id=>commit('SET_CHECKED', { id: id, checked: true }));
 		},
 
-		selectRunningContainers({ getters, commit, dispatch }) {
-			dispatch('selectNoContainers');
-			getters.runningContainerIds.forEach(id=>commit('SET_CHECKED', { id: id, checked: true }));
+		selectRunningItems({ getters, commit, dispatch }) {
+			dispatch('selectNone');
+			getters.runningIds.forEach(id=>commit('SET_CHECKED', { id: id, checked: true }));
 		},
 	},
 });
