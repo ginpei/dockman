@@ -7,7 +7,6 @@
 		<p>
 			Select:
 			<button @click="selectNone_click" class="link">None</button>
-			<button @click="selectNoNameItems_click" class="link">No Names</button>
 		</p>
 	</div>
 </template>
@@ -20,16 +19,12 @@ module.exports = {
 		},
 
 		remove_onclick(event) {
-			const ids = this.$store.getters['volume/checkedIds'];
-			this.$store.dispatch('volume/removeFromIds', ids);
+			const names = this.$store.getters['volume/checkedNames'];
+			this.$store.dispatch('volume/removeFromNames', names);
 		},
 
 		selectNone_click(event) {
 			this.$store.dispatch('volume/selectNone');
-		},
-
-		selectNoNameItems_click(event) {
-			this.$store.dispatch('volume/selectNoNameItems');
 		},
 	},
 };

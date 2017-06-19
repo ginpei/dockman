@@ -10,23 +10,16 @@ module.exports = {
 	},
 
 	getters: {
-		allIds(state) {
+		allNames(state) {
 			return Object.keys(state.checked);
-		},
-
-		noNameIds(state, getters) {
-			return getters.allIds.filter(id=>{
-				const row = state.items.find(d=>d.id===id);
-				return row.repository === '<none>';
-			});
 		},
 
 		someChecked(state) {
 			return Object.values(state.checked).some(d=>d);
 		},
 
-		checkedIds(state) {
-			return Object.keys(state.checked).filter(id=>state.checked[id]);
+		checkedNames(state) {
+			return Object.keys(state.checked).filter(name=>state.checked[name]);
 		},
 
 		listAvailable(state) {
@@ -53,13 +46,13 @@ module.exports = {
 
 		RESET_CHECKED(state) {
 			state.checked = state.items.reduce((s, d)=>{
-				s[d.id] = false;
+				s[d.name] = false;
 				return s;
 			}, {});
 		},
 
 		SET_CHECKED(state, payload) {
-			state.checked[payload.id] = payload.checked;
+			state.checked[payload.name] = payload.checked;
 		},
 
 		SET_ERROR_CODE(state, value) {
@@ -120,20 +113,21 @@ module.exports = {
 			commit('RESET_CHECKED');
 		},
 
-		removeFromIds({ dispatch }, ids) {
-			const cmd = spawn('docker', ['image', 'rm', ids.join(' ')]);
+		removeFromNames({ dispatch }, names) {
+			const cmd = spawn('docker', ['volume', 'rm', names.join(' ')]);
+
+			cmd.stderr.on('data', (data)=>{
+				const message = data.toString();
+				alert(message);
+			});
+
 			cmd.on('close', (code)=>{
 				dispatch('update');
 			});
 		},
 
 		selectNone({ getters, commit }) {
-			getters.allIds.forEach(id=>commit('SET_CHECKED', { id: id, checked: false }));
-		},
-
-		selectNoNameItems({ getters, commit, dispatch }) {
-			dispatch('selectNone');
-			getters.noNameIds.forEach(id=>commit('SET_CHECKED', { id: id, checked: true }));
+			getters.allNames.forEach(name=>commit('SET_CHECKED', { name: name, checked: false }));
 		},
 	},
 };

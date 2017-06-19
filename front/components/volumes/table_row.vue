@@ -1,6 +1,6 @@
 <template>
 	<tr :class="classes">
-		<td class="mdl-data-table__cell--non-numeric"><input v-model="$store.state.volume.checked[d.id]" type="checkbox" /></td>
+		<td class="mdl-data-table__cell--non-numeric"><input v-model="$store.state.volume.checked[d.name]" type="checkbox" /></td>
 		<td class="mdl-data-table__cell--non-numeric">{{d.name}}</td>
 		<td class="mdl-data-table__cell--non-numeric">{{d.driver}}</td>
 		<td class="mdl-data-table__cell--non-numeric">{{d.scope}}</td>
