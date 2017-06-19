@@ -113,6 +113,19 @@ module.exports = {
 			commit('RESET_CHECKED');
 		},
 
+		prune({ dispatch }) {
+			const cmd = spawn('docker', ['volume', 'prune', '-f']);
+
+			cmd.stdout.on('data', (data)=>{
+				const message = data.toString();
+				console.log(message);
+			});
+
+			cmd.on('close', (code)=>{
+				dispatch('update');
+			});
+		},
+
 		removeFromNames({ dispatch }, names) {
 			const cmd = spawn('docker', ['volume', 'rm', names.join(' ')]);
 
