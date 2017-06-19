@@ -2,14 +2,14 @@
 	<tr :class="classes">
 		<td class="mdl-data-table__cell--non-numeric"><input v-model="$store.state.image.checked[d.id]" type="checkbox" /></td>
 		<td class="mdl-data-table__cell--non-numeric">{{d.id}}</td>
-		<td v-if="url" class="mdl-data-table__cell--non-numeric">
-			<span @click="repository_click" class="link">{{d.repository}}</span>
+		<td class="mdl-data-table__cell--non-numeric">
+			<span v-if="url" @click="repository_click" class="link">{{d.repository}}</span>
+			<span v-else>{{d.repository}}</span>
 		</td>
-		<td v-else class="mdl-data-table__cell--non-numeric">{{d.repository}}</td>
-		<td v-if="url" class="mdl-data-table__cell--non-numeric">
-			<span @click="tag_click" class="link">{{d.tag}}</span>
+		<td class="mdl-data-table__cell--non-numeric">
+			<span v-if="url" @click="tag_click" class="link">{{d.tag}}</span>
+			<span v-else>{{d.tag}}</span>
 		</td>
-		<td v-else class="mdl-data-table__cell--non-numeric">{{d.tag}}</td>
 		<td class="mdl-data-table__cell--non-numeric">{{d.digest}}</td>
 		<td class="mdl-data-table__cell--non-numeric">{{d.createdSince}}</td>
 		<td class="mdl-data-table__cell--non-numeric">{{d.createdAt}}</td>
