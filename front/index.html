@@ -19,6 +19,15 @@
 		<script>
 			window.spawn = require('child_process').spawn;
 			window.shell = require('electron').shell;
+
+			document.addEventListener('click', (event)=>{
+				const elLink = event.target.closest('a[href^="http:"], a[href^="https:"]');
+				if (elLink) {
+					event.preventDefault();
+					const url = elLink.href;
+					window.shell.openItem(url);
+				}
+			});
 		</script>
 		<script src="../build/front.js"></script>
 	</body>

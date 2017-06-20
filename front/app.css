@@ -15,6 +15,31 @@ button.link {
 	border-style: none;
 	padding: 0;
 }
+:link[href^="http:"]::before,
+:link[href^="https:"]::before {
+	content: "\f08e";
+	display: inline-block;
+	font-size: inherit;
+	-webkit-font-smoothing: antialiased;
+	font: normal normal normal 14px/1 FontAwesome;
+	margin-right: 0.1em;
+	text-rendering: auto;
+}
+
+.row {
+	display: flex;
+}
+.row > .col {
+	width: 100%;
+}
+
+.block {
+	display: block;
+}
+
+.text-right {
+	text-align: right;
+}
 
 .title {
 	margin-top: 0;
