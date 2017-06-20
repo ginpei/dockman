@@ -7,9 +7,7 @@
 					<a class="block" href="https://docs.docker.com/engine/reference/commandline/images/">Document</a>
 				</div>
 			</div>
-			<div v-show="$store.state.image.working">
-				...
-			</div>
+			<working-indicator :show="$store.state.image.working"></working-indicator>
 			<div v-show="$store.getters['image/listAvailable']">
 				<image-status-bulk-editor></image-status-bulk-editor>
 				<image-status-table></image-status-table>
@@ -28,12 +26,14 @@
 const BaseLayout = require('../BaseLayout.vue');
 const ImageStatusBulkEditor = require('./bulk_editor.vue');
 const ImageStatusTable = require('./table.vue');
+const WorkingIndicator = require('../misc/WorkingIndicator.vue');
 
 module.exports = {
 	components: {
 		BaseLayout,
 		ImageStatusBulkEditor,
 		ImageStatusTable,
+		WorkingIndicator,
 	},
 	mounted: function() {
 		this.$store.dispatch('image/update');

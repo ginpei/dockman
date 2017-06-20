@@ -48,3 +48,19 @@ button.link {
 .text-right {
 	text-align: right;
 }
+
+/* Specific */
+
+.loadingIndicator {
+	left: 0;
+	text-align: center;
+	opacity: 0;
+	pointer-events: none;
+	position: absolute;
+	transition: opacity 300ms;
+	width: 100%;
+}
+.loadingIndicator.loading {
+	opacity: 1;
+	transition: none;
+}

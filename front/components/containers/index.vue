@@ -7,9 +7,7 @@
 					<a class="open" href="https://docs.docker.com/engine/reference/commandline/container/">Document</a>
 				</div>
 			</div>
-			<div v-show="$store.state.container.working">
-				...
-			</div>
+			<working-indicator :show="$store.state.container.working"></working-indicator>
 			<div v-show="$store.getters['container/listAvailable']">
 				<container-status-bulk-editor></container-status-bulk-editor>
 				<container-status-table></container-status-table>
@@ -29,12 +27,14 @@ const BaseLayout = require('../BaseLayout.vue');
 const ContainerStatusBulkEditor = require('./bulk_editor.vue');
 const ContainerStatusTable = require('./table.vue');
 const ContainerStatus = require('../../ContainerStatus.js');
+const WorkingIndicator = require('../misc/WorkingIndicator.vue');
 
 module.exports = {
 	components: {
 		BaseLayout,
 		ContainerStatusBulkEditor,
 		ContainerStatusTable,
+		WorkingIndicator,
 	},
 	mounted: function() {
 		this.$store.dispatch('container/update');

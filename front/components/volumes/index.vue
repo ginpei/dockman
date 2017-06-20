@@ -7,9 +7,7 @@
 					<a class="block" href="https://docs.docker.com/engine/reference/commandline/volume_ls/">Document</a>
 				</div>
 			</div>
-			<div v-show="$store.state.volume.working">
-				...
-			</div>
+			<working-indicator :show="$store.state.volume.working"></working-indicator>
 			<div v-show="$store.getters['volume/listAvailable']">
 				<bulk-editor></bulk-editor>
 				<volume-table></volume-table>
@@ -28,12 +26,14 @@
 const BaseLayout = require('../BaseLayout.vue');
 const BulkEditor = require('./bulk_editor.vue');
 const VolumeTable = require('./table.vue');
+const WorkingIndicator = require('../misc/WorkingIndicator.vue');
 
 module.exports = {
 	components: {
 		BaseLayout,
 		BulkEditor,
 		VolumeTable,
+		WorkingIndicator,
 	},
 	mounted: function() {
 		this.$store.dispatch('volume/update');
