@@ -1,8 +1,16 @@
+/* Layout */
+
 .container {
 	margin: 0 auto;
 	max-width: 800px;
 	padding: 1em;
 }
+
+.title {
+	margin-top: 0;
+}
+
+/* Common */
 
 a,
 .link {
@@ -39,8 +47,4 @@ button.link {
 
 .text-right {
 	text-align: right;
-}
-
-.title {
-	margin-top: 0;
 }
