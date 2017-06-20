@@ -10,6 +10,9 @@
 				<image-status-table></image-status-table>
 			</div>
 			<div v-show="$store.getters['image/errorOccured']">
+				<p>
+					<button @click="update_onclick"><i class="fa fa-refresh" aria-hidden="true"></i> Update</button>
+				</p>
 				<p>ERROR #{{$store.state.image.errorCode}}: <q>{{$store.state.image.errorMessage}}</q></p>
 			</div>
 		</div>
@@ -29,6 +32,11 @@ module.exports = {
 	},
 	mounted: function() {
 		this.$store.dispatch('image/update');
+	},
+	methods: {
+		update_onclick(event) {
+			this.$store.dispatch('image/update');
+		},
 	},
 };
 </script>
