@@ -8,7 +8,7 @@
 				</div>
 			</div>
 			<container-status-bulk-editor></container-status-bulk-editor>
-			<working-indicator :show="$store.state.container.working"></working-indicator>
+			<working-indicator :show="$store.getters['container/working']"></working-indicator>
 			<div v-show="$store.getters['container/errorOccured']">
 				<p>ERROR #{{$store.state.container.errorCode}}: <q>{{$store.state.container.errorMessage}}</q></p>
 			</div>

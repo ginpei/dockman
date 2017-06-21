@@ -8,7 +8,7 @@
 				</div>
 			</div>
 			<image-status-bulk-editor></image-status-bulk-editor>
-			<working-indicator :show="$store.state.image.working"></working-indicator>
+			<working-indicator :show="$store.getters['image/working']"></working-indicator>
 			<div v-show="$store.getters['image/errorOccured']">
 				<p>ERROR #{{$store.state.image.errorCode}}: <q>{{$store.state.image.errorMessage}}</q></p>
 			</div>

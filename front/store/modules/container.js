@@ -4,7 +4,7 @@ module.exports = {
 	namespaced: true,
 
 	state: {
-		working: true,
+		numWorking: 0,
 		containers: [],
 		checked: {},
 		errorCode: 0,
@@ -12,6 +12,10 @@ module.exports = {
 	},
 
 	getters: {
+		working(state) {
+			return state.numWorking > 0;
+		},
+
 		allIds(state) {
 			return Object.keys(state.checked);
 		},
@@ -45,22 +49,22 @@ module.exports = {
 			return Object.keys(state.checked).filter(id=>state.checked[id]);
 		},
 
-		listAvailable(state) {
-			return !state.working && state.containers.length > 0;
+		listAvailable(state, getters) {
+			return !getters.working && state.containers.length > 0;
 		},
 
-		errorOccured(state) {
-			return !state.working && state.errorCode;
+		errorOccured(state, getters) {
+			return !getters.working && state.errorCode;
 		},
 	},
 
 	mutations: {
 		START_WORKING(state) {
-			state.working = true;
+			state.numWorking += 1;
 		},
 
-		FINISH_FORKING(state) {
-			state.working = false;
+		FINISH_FORKING(state) {  // TODO fix typo
+			state.numWorking -= 1;
 		},
 
 		SET_CONTAINERS(state, containers) {
@@ -118,6 +122,8 @@ module.exports = {
 		},
 
 		removeFromIds({ commit, dispatch }, ids) {
+			commit('START_WORKING');
+
 			const cmd = spawn('docker', ['container', 'rm', ids.join(' ')]);
 
 			cmd.stderr.on('data', (data)=>{
@@ -127,7 +133,6 @@ module.exports = {
 			cmd.on('close', (code)=>{
 				commit('FINISH_FORKING');
 				commit('SET_ERROR_CODE', code);
-				console.debug(code);
 
 				// if no errors
 				if (!code) {
@@ -137,6 +142,8 @@ module.exports = {
 		},
 
 		stopFromIds({ commit, dispatch }, ids) {
+			commit('START_WORKING');
+
 			const cmd = spawn('docker', ['stop', ids.join(' ')]);
 
 			cmd.stderr.on('data', (data)=>{
