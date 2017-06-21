@@ -3,11 +3,11 @@
 		<td class="mdl-data-table__cell--non-numeric"><input v-model="$store.state.image.checked[d.id]" type="checkbox" /></td>
 		<td class="mdl-data-table__cell--non-numeric">{{d.id}}</td>
 		<td class="mdl-data-table__cell--non-numeric">
-			<span v-if="url" @click="repository_click" class="link">{{d.repository}}</span>
+			<a v-if="url" :href="url">{{d.repository}}</a>
 			<span v-else>{{d.repository}}</span>
 		</td>
 		<td class="mdl-data-table__cell--non-numeric">
-			<span v-if="url" @click="tag_click" class="link">{{d.tag}}</span>
+			<a v-if="url" :href="taggedUrl">{{d.tag}}</a>
 			<span v-else>{{d.tag}}</span>
 		</td>
 		<td class="mdl-data-table__cell--non-numeric">{{d.digest}}</td>
@@ -42,21 +42,6 @@ module.exports = {
 			const tag = this.d.tag;
 			const url = `https://hub.docker.com/r/library/${name}/tags/${tag}/`;
 			return url;
-		},
-	},
-	methods: {
-		repository_click(event) {
-			const success = window.shell.openItem(this.url);
-			if (!success) {
-				console.error('Failed to open the URL', this.url);
-			}
-		},
-
-		tag_click(event) {
-			const success = window.shell.openItem(this.taggedUrl);
-			if (!success) {
-				console.error('Failed to open the URL', this.taggedUrl);
-			}
 		},
 	},
 };
