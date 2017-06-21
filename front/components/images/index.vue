@@ -7,16 +7,13 @@
 					<a class="block" href="https://docs.docker.com/engine/reference/commandline/image/">Document</a>
 				</div>
 			</div>
+			<image-status-bulk-editor></image-status-bulk-editor>
 			<working-indicator :show="$store.state.image.working"></working-indicator>
-			<div v-show="$store.getters['image/listAvailable']">
-				<image-status-bulk-editor></image-status-bulk-editor>
-				<image-status-table></image-status-table>
-			</div>
 			<div v-show="$store.getters['image/errorOccured']">
-				<p>
-					<button @click="update_onclick"><i class="fa fa-refresh" aria-hidden="true"></i> Update</button>
-				</p>
 				<p>ERROR #{{$store.state.image.errorCode}}: <q>{{$store.state.image.errorMessage}}</q></p>
+			</div>
+			<div v-show="$store.getters['image/listAvailable']">
+				<image-status-table></image-status-table>
 			</div>
 		</div>
 	</base-layout>
@@ -37,11 +34,6 @@ module.exports = {
 	},
 	mounted: function() {
 		this.$store.dispatch('image/update');
-	},
-	methods: {
-		update_onclick(event) {
-			this.$store.dispatch('image/update');
-		},
 	},
 };
 </script>

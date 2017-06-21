@@ -7,16 +7,13 @@
 					<a class="open" href="https://docs.docker.com/engine/reference/commandline/container/">Document</a>
 				</div>
 			</div>
+			<container-status-bulk-editor></container-status-bulk-editor>
 			<working-indicator :show="$store.state.container.working"></working-indicator>
-			<div v-show="$store.getters['container/listAvailable']">
-				<container-status-bulk-editor></container-status-bulk-editor>
-				<container-status-table></container-status-table>
-			</div>
 			<div v-show="$store.getters['container/errorOccured']">
-				<p>
-					<button @click="update_onclick"><i class="fa fa-refresh" aria-hidden="true"></i> Update</button>
-				</p>
 				<p>ERROR #{{$store.state.container.errorCode}}: <q>{{$store.state.container.errorMessage}}</q></p>
+			</div>
+			<div v-show="$store.getters['container/listAvailable']">
+				<container-status-table></container-status-table>
 			</div>
 		</div>
 	</base-layout>

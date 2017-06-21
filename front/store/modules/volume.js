@@ -126,16 +126,21 @@ module.exports = {
 			});
 		},
 
-		removeFromNames({ dispatch }, names) {
+		removeFromNames({ commit, dispatch }, names) {
 			const cmd = spawn('docker', ['volume', 'rm', names.join(' ')]);
 
 			cmd.stderr.on('data', (data)=>{
-				const message = data.toString();
-				alert(message);
+				commit('SET_ERROR_MESSAGE', data.toString());
 			});
 
 			cmd.on('close', (code)=>{
-				dispatch('update');
+				commit('FINISH_FORKING');
+				commit('SET_ERROR_CODE', code);
+
+				// if no errors
+				if (!code) {
+					dispatch('update');
+				}
 			});
 		},
 

@@ -7,16 +7,13 @@
 					<a class="block" href="https://docs.docker.com/engine/reference/commandline/volume/">Document</a>
 				</div>
 			</div>
+			<bulk-editor></bulk-editor>
 			<working-indicator :show="$store.state.volume.working"></working-indicator>
-			<div v-show="$store.getters['volume/listAvailable']">
-				<bulk-editor></bulk-editor>
-				<volume-table></volume-table>
-			</div>
 			<div v-show="$store.getters['volume/errorOccured']">
-				<p>
-					<button @click="update_onclick"><i class="fa fa-refresh" aria-hidden="true"></i> Update</button>
-				</p>
 				<p>ERROR #{{$store.state.volume.errorCode}}: <q>{{$store.state.volume.errorMessage}}</q></p>
+			</div>
+			<div v-show="$store.getters['volume/listAvailable']">
+				<volume-table></volume-table>
 			</div>
 		</div>
 	</base-layout>
@@ -37,11 +34,6 @@ module.exports = {
 	},
 	mounted: function() {
 		this.$store.dispatch('volume/update');
-	},
-	methods: {
-		update_onclick(event) {
-			this.$store.dispatch('volume/update');
-		},
 	},
 };
 </script>

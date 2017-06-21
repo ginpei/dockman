@@ -117,6 +117,25 @@ module.exports = {
 			commit('RESET_CHECKED');
 		},
 
+		removeFromIds({ commit, dispatch }, ids) {
+			const cmd = spawn('docker', ['container', 'rm', ids.join(' ')]);
+
+			cmd.stderr.on('data', (data)=>{
+				commit('SET_ERROR_MESSAGE', data.toString());
+			});
+
+			cmd.on('close', (code)=>{
+				commit('FINISH_FORKING');
+				commit('SET_ERROR_CODE', code);
+				console.debug(code);
+
+				// if no errors
+				if (!code) {
+					dispatch('update');
+				}
+			});
+		},
+
 		selectNone({ getters, commit }) {
 			getters.allIds.forEach(id=>commit('SET_CHECKED', { id: id, checked: false }));
 		},
