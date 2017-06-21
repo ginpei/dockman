@@ -2,6 +2,7 @@
 	<div>
 		<p>
 			<button @click="update_onclick"><i class="fa fa-refresh" aria-hidden="true"></i> Update</button>
+			<button @click="prune_onclick" :disabled="!$store.getters['container/listAvailable']"><i class="fa fa-scissors" aria-hidden="true"></i> Prune</button>
 			<button @click="remove_onclick" :disabled="!$store.getters['container/someChecked']"><i class="fa fa-trash" aria-hidden="true"></i> Remove</button>
 			<button @click="stop_onclick" :disabled="!$store.getters['container/someChecked']"><i class="fa fa-stop-circle" aria-hidden="true"></i> Stop</button>
 		</p>
@@ -20,6 +21,14 @@ module.exports = {
 	methods: {
 		update_onclick(event) {
 			this.$store.dispatch('container/update');
+		},
+
+		prune_onclick(event) {
+			const message = 'WARNING! This will remove all stopped containers.\nAre you sure you want to continue?';
+			const yes = window.confirm(message);
+			if (yes) {
+				this.$store.dispatch('container/prune');
+			}
 		},
 
 		remove_onclick(event) {

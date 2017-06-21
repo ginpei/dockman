@@ -121,6 +121,31 @@ module.exports = {
 			commit('RESET_CHECKED');
 		},
 
+		prune({ commit, dispatch }) {
+			commit('START_WORKING');
+
+			const cmd = spawn('docker', ['container', 'prune', '-f']);
+
+			cmd.stdout.on('data', (data)=>{
+				const message = data.toString();
+				console.log(message);
+			});
+
+			cmd.stderr.on('data', (data)=>{
+				commit('SET_ERROR_MESSAGE', data.toString());
+			});
+
+			cmd.on('close', (code)=>{
+				commit('FINISH_FORKING');
+				commit('SET_ERROR_CODE', code);
+
+				// if no errors
+				if (!code) {
+					dispatch('update');
+				}
+			});
+		},
+
 		removeFromIds({ commit, dispatch }, ids) {
 			commit('START_WORKING');
 
