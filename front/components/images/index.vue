@@ -9,9 +9,11 @@
 			</div>
 			<image-status-bulk-editor></image-status-bulk-editor>
 			<working-indicator :show="$store.getters['image/working']"></working-indicator>
-			<div v-show="$store.getters['image/errorOccured']">
-				<p>ERROR #{{$store.state.image.errorCode}}: <q>{{$store.state.image.errorMessage}}</q></p>
-			</div>
+			<error-message
+				v-show="$store.getters['image/errorOccured']"
+				:code="$store.state.image.errorCode"
+				:message="$store.state.image.errorMessage"
+				></error-message>
 			<div v-show="$store.getters['image/listAvailable']">
 				<image-status-table></image-status-table>
 			</div>
@@ -23,6 +25,7 @@
 const BaseLayout = require('../BaseLayout.vue');
 const ImageStatusBulkEditor = require('./bulk_editor.vue');
 const ImageStatusTable = require('./table.vue');
+const ErrorMessage = require('../misc/ErrorMessage.vue');
 const WorkingIndicator = require('../misc/WorkingIndicator.vue');
 
 module.exports = {
@@ -30,6 +33,7 @@ module.exports = {
 		BaseLayout,
 		ImageStatusBulkEditor,
 		ImageStatusTable,
+		ErrorMessage,
 		WorkingIndicator,
 	},
 	mounted: function() {

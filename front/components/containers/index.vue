@@ -9,8 +9,11 @@
 			</div>
 			<container-status-bulk-editor></container-status-bulk-editor>
 			<working-indicator :show="$store.getters['container/working']"></working-indicator>
-			<div v-show="$store.getters['container/errorOccured']">
-				<p>ERROR #{{$store.state.container.errorCode}}: <q>{{$store.state.container.errorMessage}}</q></p>
+			<error-message
+				v-show="$store.getters['container/errorOccured']"
+				:code="$store.state.container.errorCode"
+				:message="$store.state.container.errorMessage"
+				></error-message>
 			</div>
 			<div v-show="$store.getters['container/listAvailable']">
 				<container-status-table></container-status-table>
@@ -21,9 +24,10 @@
 
 <script>
 const BaseLayout = require('../BaseLayout.vue');
+const ContainerStatus = require('../../ContainerStatus.js');
 const ContainerStatusBulkEditor = require('./bulk_editor.vue');
 const ContainerStatusTable = require('./table.vue');
-const ContainerStatus = require('../../ContainerStatus.js');
+const ErrorMessage = require('../misc/ErrorMessage.vue');
 const WorkingIndicator = require('../misc/WorkingIndicator.vue');
 
 module.exports = {
@@ -31,6 +35,7 @@ module.exports = {
 		BaseLayout,
 		ContainerStatusBulkEditor,
 		ContainerStatusTable,
+		ErrorMessage,
 		WorkingIndicator,
 	},
 	mounted: function() {
