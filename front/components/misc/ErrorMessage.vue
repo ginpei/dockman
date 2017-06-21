@@ -17,7 +17,14 @@ module.exports = {
 	props: ['code', 'message'],
 	computed: {
 		url() {
-			return `https://www.google.com/search?q=${this.message}`;
+			// remove long word
+			const threshold = 10;
+			const query = this.message
+				.split(' ')
+				.filter(d=>d.length<threshold)
+				.join(' ');
+
+			return `https://www.google.com/search?q=${query}`;
 		},
 	},
 };
