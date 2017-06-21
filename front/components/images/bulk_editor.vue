@@ -2,6 +2,7 @@
 	<div>
 		<p>
 			<button @click="update_onclick"><i class="fa fa-refresh" aria-hidden="true"></i> Update</button>
+			<button @click="prune_onclick" :disabled="!$store.getters['image/listAvailable']"><i class="fa fa-scissors" aria-hidden="true"></i> Prune</button>
 			<button @click="remove_onclick" :disabled="!$store.getters['image/someChecked']"><i class="fa fa-trash" aria-hidden="true"></i> Remove</button>
 		</p>
 		<p>
@@ -17,6 +18,14 @@ module.exports = {
 	methods: {
 		update_onclick(event) {
 			this.$store.dispatch('image/update');
+		},
+
+		prune_onclick(event) {
+			const message = 'WARNING! This will remove all dangling images.\nAre you sure you want to continue?';
+			const yes = window.confirm(message);
+			if (yes) {
+				this.$store.dispatch('image/prune');
+			}
 		},
 
 		remove_onclick(event) {

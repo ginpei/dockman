@@ -122,6 +122,19 @@ module.exports = {
 			commit('RESET_CHECKED');
 		},
 
+		prune({ dispatch }) {
+			const cmd = spawn('docker', ['image', 'prune', '-f']);
+
+			cmd.stdout.on('data', (data)=>{
+				const message = data.toString();
+				console.log(message);
+			});
+
+			cmd.on('close', (code)=>{
+				dispatch('update');
+			});
+		},
+
 		removeFromIds({ dispatch }, ids) {
 			const cmd = spawn('docker', ['image', 'rm', ids.join(' ')]);
 			cmd.on('close', (code)=>{
