@@ -4,7 +4,7 @@
 			<div class="row">
 				<h1 class="col title">Volumes</h1>
 				<div class="col text-right">
-					<a class="block" href="https://docs.docker.com/engine/reference/commandline/volume_ls/">Document</a>
+					<a class="block" href="https://docs.docker.com/engine/reference/commandline/volume/">Document</a>
 				</div>
 			</div>
 			<working-indicator :show="$store.state.volume.working"></working-indicator>

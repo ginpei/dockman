@@ -4,7 +4,7 @@
 			<div class="row">
 				<h1 class="col title">Images</h1>
 				<div class="col text-right">
-					<a class="block" href="https://docs.docker.com/engine/reference/commandline/images/">Document</a>
+					<a class="block" href="https://docs.docker.com/engine/reference/commandline/image/">Document</a>
 				</div>
 			</div>
 			<working-indicator :show="$store.state.image.working"></working-indicator>
