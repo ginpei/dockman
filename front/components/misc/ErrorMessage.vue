@@ -9,11 +9,16 @@ p {
 </style>
 
 <template>
-	<p>ERROR #{{code}}: <q>{{message}}</q></p>
+	<p>ERROR #{{code}}: <q>{{message}}</q> <a :href="url">Search on the Internet</a></p>
 </template>
 
 <script>
 module.exports = {
 	props: ['code', 'message'],
+	computed: {
+		url() {
+			return `https://www.google.com/search?q=${this.message}`;
+		},
+	},
 };
 </script>
