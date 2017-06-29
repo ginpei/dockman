@@ -8,7 +8,7 @@
     "run": "electron .",
     "lint": "eslint --ext js,vue ./main.js front/*.js front/**/*.vue",
     "postinstall": "mkdir build || true",
-    "start": "npm run lint && concurrently \"npm run run -s\" \"npm run dev-front -s\""
+    "start": "npm run lint -s & concurrently \"npm run run -s\" \"npm run dev-front -s\""
   },
   "dependencies": {
     "browserify": "^14.4.0",
