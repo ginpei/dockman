@@ -6,7 +6,7 @@
   "scripts": {
     "dev-front": "watchify -dv -t vueify -e front/index.js -o build/front.js",
     "run": "electron .",
-    "lint": "eslint ./main.js front/*.js",
+    "lint": "eslint --ext js,vue ./main.js front/*.js front/**/*.vue",
     "postinstall": "mkdir build || true",
     "start": "npm run lint && concurrently \"npm run run -s\" \"npm run dev-front -s\""
   },
@@ -23,6 +23,7 @@
   "devDependencies": {
     "concurrently": "^3.4.0",
     "eslint": "^4.0.0",
+    "eslint-plugin-html": "^3.0.0",
     "watchify": "^3.9.0"
   }
 }

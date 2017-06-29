@@ -25,7 +25,8 @@ module.exports = {
 
 		prune_onclick(event) {
 			const message = 'WARNING! This will remove all stopped containers.\nAre you sure you want to continue?';
-			const yes = window.confirm(message);
+			// TODO prepare custom confirm
+			const yes = window.confirm(message);  // eslint-disable-line no-alert
 			if (yes) {
 				this.$store.dispatch('container/prune');
 			}

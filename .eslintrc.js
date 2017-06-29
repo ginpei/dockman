@@ -4,6 +4,9 @@ module.exports = {
 		"es6": true,
 		"node": true
 	},
+	"plugins": [
+		"html"
+	],
 	"extends": "eslint:recommended",
 	"rules": {
 		"accessor-pairs": "error",
@@ -107,6 +110,12 @@ module.exports = {
 		"no-caller": "error",
 		"no-catch-shadow": "error",
 		"no-confusing-arrow": "error",
+		"no-console": [
+			"error",
+			{
+				"allow": ["error"]
+			}
+		],
 		"no-continue": "error",
 		"no-div-regex": "error",
 		"no-duplicate-imports": "error",
