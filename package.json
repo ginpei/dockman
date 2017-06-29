@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "main": "main.js",
   "scripts": {
-    "dev-front": "watchify -dv -t vueify -e front/index.js -o build/front.js",
+    "dev-front": "watchify -dv -t vueify -p browserify-hmr -e front/index.js -o build/front.js",
     "run": "electron .",
     "lint": "eslint --ext js,vue ./main.js front/*.js front/**/*.vue",
     "postinstall": "mkdir build || true",
@@ -21,6 +21,7 @@
     "vuex": "^2.3.1"
   },
   "devDependencies": {
+    "browserify-hmr": "^0.3.5",
     "concurrently": "^3.4.0",
     "eslint": "^4.0.0",
     "eslint-plugin-html": "^3.0.0",
