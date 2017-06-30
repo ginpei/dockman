@@ -78,9 +78,15 @@
 	module.exports = {
 		mounted() {
 			this.animate();
+
+			this._scrollListener = ()=>this.animateAll();
+			window.document.addEventListener('scroll', this._scrollListener);
 		},
 		updated() {
 			this.animate();
+		},
+		unmounted() {
+			window.document.removeEventListener('scroll', this._scrollListener);
 		},
 		methods: {
 			animate() {
@@ -92,6 +98,14 @@
 						this.animate();
 					}, 50);
 				}
+			},
+
+			animateAll() {
+				clearTimeout(this.tmDispatchAnimation);
+				const els = this.$el.querySelectorAll('[routing-animation]:not(.is-preparedRoutingAnimation)');
+				Array.from(els).forEach(el=>{
+					el.classList.add('is-preparedRoutingAnimation');
+				});
 			},
 		},
 	};
