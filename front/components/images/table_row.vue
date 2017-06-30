@@ -20,6 +20,11 @@
 <script>
 module.exports = {
 	props: ['d'],
+
+	updated() {
+		this.$el.classList.remove('is-preparedRoutingAnimation');
+	},
+
 	computed: {
 		url() {
 			let url = null;

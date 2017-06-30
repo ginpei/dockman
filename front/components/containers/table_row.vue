@@ -13,6 +13,10 @@
 module.exports = {
 	props: ['d'],
 
+	updated() {
+		this.$el.classList.remove('is-preparedRoutingAnimation');
+	},
+
 	computed: {
 		classes() {
 			return {

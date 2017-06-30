@@ -77,10 +77,22 @@
 <script>
 	module.exports = {
 		mounted() {
-			const els = Array.from(this.$el.querySelectorAll('[routing-animation]'));
-			els.forEach((el, index)=>{
-				setTimeout(()=>el.classList.add('is-preparedRoutingAnimation'), 50 * index);
-			});
+			this.animate();
+		},
+		updated() {
+			this.animate();
+		},
+		methods: {
+			animate() {
+				const el = this.$el.querySelector('[routing-animation]:not(.is-preparedRoutingAnimation)');
+				if (el) {
+					clearTimeout(this.tmDispatchAnimation);
+					this.tmDispatchAnimation = setTimeout(()=>{
+						el.classList.add('is-preparedRoutingAnimation');
+						this.animate();
+					}, 50);
+				}
+			},
 		},
 	};
 </script>
