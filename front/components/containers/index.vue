@@ -14,7 +14,6 @@
 				:code="$store.state.container.errorCode"
 				:message="$store.state.container.errorMessage"
 				></error-message>
-			</div>
 			<div v-show="$store.getters['container/listAvailable']">
 				<container-status-table></container-status-table>
 			</div>
