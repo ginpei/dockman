@@ -49,6 +49,27 @@ button.link {
 	text-align: right;
 }
 
+/* Routing Animation */
+[routing-animation] {
+  visibility: hidden;
+}
+[routing-animation].is-preparedRoutingAnimation {
+  animation: routingAnimation-show 300ms;
+  visibility: visible;
+}
+tr[routing-animation].is-preparedRoutingAnimation,
+[routing-animation="horizontal"].is-preparedRoutingAnimation {
+	animation-name: routingAnimation-show-horizontal;
+}
+@keyframes routingAnimation-show {
+  0%   { opacity: 0; transform: translateY(1rem); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes routingAnimation-show-horizontal {
+  0%   { opacity: 0; transform: translateX(1rem); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
 /* Specific */
 
 .loadingIndicator {

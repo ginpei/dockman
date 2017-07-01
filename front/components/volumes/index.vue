@@ -2,7 +2,7 @@
 	<base-layout>
 		<div class="container">
 			<div class="row">
-				<h1 class="col title">Volumes</h1>
+				<h1 class="col title" routing-animation>Volumes</h1>
 				<div class="col text-right">
 					<a class="block" href="https://docs.docker.com/engine/reference/commandline/volume/">Document</a>
 				</div>

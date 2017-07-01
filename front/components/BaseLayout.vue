@@ -73,3 +73,21 @@
 		</div>
 	</div>
 </template>
+
+<script>
+const routingAnimation = require('../routing-animation.js').get();
+
+module.exports = {
+	mounted() {
+		routingAnimation.start();
+	},
+
+	updated() {
+		routingAnimation.animateNext();
+	},
+
+	unmounted() {
+		routingAnimation.stop();
+	},
+};
+</script>

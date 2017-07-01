@@ -1,5 +1,5 @@
 <template>
-	<tr :class="classes">
+	<tr :class="classes" routing-animation>
 		<td class="mdl-data-table__cell--non-numeric"><input v-model="$store.state.volume.checked[d.name]" type="checkbox" /></td>
 		<td class="mdl-data-table__cell--non-numeric">{{d.name}}</td>
 		<td class="mdl-data-table__cell--non-numeric">{{d.driver}}</td>
@@ -10,8 +10,15 @@
 </template>
 
 <script>
+const routingAnimation = require('../../routing-animation.js').get();
+
 module.exports = {
 	props: ['d'],
+
+	updated() {
+		routingAnimation.resetElement(this.$el);
+	},
+
 	computed: {
 		url() {
 			let url = null;
