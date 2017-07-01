@@ -75,51 +75,51 @@
 </template>
 
 <script>
-	module.exports = {
-		mounted() {
-			this.animateNext();
+module.exports = {
+	mounted() {
+		this.animateNext();
 
-			this._scrollListener = ()=>this.animateAll();
-			window.document.addEventListener('scroll', this._scrollListener);
-		},
-		updated() {
-			this.animateNext();
-		},
-		unmounted() {
-			window.document.removeEventListener('scroll', this._scrollListener);
-		},
-		methods: {
-			animateNext() {
-				const el = this._selectAnimationTargets()[0];
-				if (el) {
-					this.stopAnimating();
-					this.tmDispatchAnimation = setTimeout(()=>{
-						this._startAnimation(el);
-						this.animateNext();
-					}, 50);
-				}
-			},
-
-			animateAll() {
+		this._scrollListener = ()=>this.animateAll();
+		window.document.addEventListener('scroll', this._scrollListener);
+	},
+	updated() {
+		this.animateNext();
+	},
+	unmounted() {
+		window.document.removeEventListener('scroll', this._scrollListener);
+	},
+	methods: {
+		animateNext() {
+			const el = this._selectAnimationTargets()[0];
+			if (el) {
 				this.stopAnimating();
-
-				const els = this._selectAnimationTargets();
-				Array.from(els).forEach((el)=>{
+				this.tmDispatchAnimation = setTimeout(()=>{
 					this._startAnimation(el);
-				});
-			},
-
-			stopAnimating() {
-				clearTimeout(this.tmDispatchAnimation);
-			},
-
-			_selectAnimationTargets() {
-				return this.$el.querySelectorAll('[routing-animation]:not(.is-preparedRoutingAnimation)');
-			},
-
-			_startAnimation(el) {
-				el.classList.add('is-preparedRoutingAnimation');
-			},
+					this.animateNext();
+				}, 50);
+			}
 		},
-	};
+
+		animateAll() {
+			this.stopAnimating();
+
+			const els = this._selectAnimationTargets();
+			Array.from(els).forEach((el)=>{
+				this._startAnimation(el);
+			});
+		},
+
+		stopAnimating() {
+			clearTimeout(this.tmDispatchAnimation);
+		},
+
+		_selectAnimationTargets() {
+			return this.$el.querySelectorAll('[routing-animation]:not(.is-preparedRoutingAnimation)');
+		},
+
+		_startAnimation(el) {
+			el.classList.add('is-preparedRoutingAnimation');
+		},
+	},
+};
 </script>
