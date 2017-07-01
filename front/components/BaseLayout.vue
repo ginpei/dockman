@@ -82,13 +82,17 @@ module.exports = {
 		this._scrollListener = ()=>this.animateAll();
 		window.document.addEventListener('scroll', this._scrollListener);
 	},
+
 	updated() {
 		this.animateNext();
 	},
+
 	unmounted() {
 		window.document.removeEventListener('scroll', this._scrollListener);
 	},
+
 	methods: {
+
 		animateNext() {
 			const el = this._selectAnimationTargets()[0];
 			if (el) {
