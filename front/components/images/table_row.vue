@@ -18,11 +18,13 @@
 </template>
 
 <script>
+const routingAnimation = require('../../routing-animation.js').get();
+
 module.exports = {
 	props: ['d'],
 
 	updated() {
-		this.$el.classList.remove('is-preparedRoutingAnimation');
+		routingAnimation.resetElement(this.$el);
 	},
 
 	computed: {
