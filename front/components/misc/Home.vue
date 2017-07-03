@@ -3,7 +3,7 @@
 		<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 			<header class="mdl-layout__header">
 				<div class="mdl-layout__header-row">
-					<span class="mdl-layout-title">Dockman</span>
+					<div class="mdl-layout-title" routing-animation>Dockman</div>
 					<div class="mdl-layout-spacer"></div>
 					<nav class="mdl-navigation mdl-layout--large-screen-only">
 						<router-link to="/containers/" class="mdl-navigation__link">Images</router-link>
